@@ -1,0 +1,31 @@
+fish_x = 320
+fish_y = 240
+    
+def setup():
+    size(640, 480)
+    background("#6EC5E9")
+    
+def draw():
+    background("#6EC5E9")
+    fish_movement()
+    
+def fish_movement():
+    global fish_x
+    global fish_y
+    fill(0)
+    ellipse(fish_x, fish_y, 50, 50)
+    
+def keyPressed():
+    global fish_x
+    global fish_y
+    if key == CODED:
+        if keyCode == UP:
+            fish_y -= 5
+        elif keyCode == DOWN:
+            fish_y += 5
+        elif keyCode == RIGHT:
+            fish_x += 5
+        elif keyCode == LEFT:
+            fish_x -= 5
+       
+        
