@@ -1,0 +1,36 @@
+def setup():
+    size(640,480)
+page=0
+def draw():
+    global page
+    background(255)
+    draw_button("PLAY",170,190,300,80,(239,201,239))
+    draw_button("LEADERBOARD",170,300,300,80,(239,201,239))
+    if page==1:
+        setting()
+    elif page==2:
+        leaderboard()
+
+def draw_button(button_text,button_x,button_y,button_width,button_height,(r,g,b)):
+    global page
+    noStroke()
+    rect(button_x,button_y,button_width,button_height)
+    if mouseX in range(button_x,button_x+button_width) and mouseY in range(button_y,button_y+button_height):
+        fill(r-50,g-50,b-50)
+        if mousePressed:
+            if button_text=="PLAY":
+                page=1
+            elif button_text=="LEADERBOARD":
+                page=2    
+    else:
+        fill(r,g,b)
+
+    rect(button_x,button_y,button_width,button_height)
+    
+    fill(255)
+    textSize(30)
+    textAlign(CENTER,CENTER)
+    pushMatrix()
+    translate(button_x,button_y)
+    text(button_text,button_width/2,button_height/2)
+    popMatrix()
