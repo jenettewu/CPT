@@ -5,11 +5,13 @@ leaderboard_pass=False
 def draw():
     global page
     background(255)
+    menu()
+def menu():
     draw_button("PLAY",170,190,300,80,(239,201,239))
     draw_button("LEADERBOARD",170,300,300,80,(239,201,239))
     play()
     leaderboard()
-
+        
 def draw_button(button_text,button_x,button_y,button_width,button_height,(r,g,b)):
     global page,playing_pass,leaderboard_pass
     noStroke()
@@ -36,9 +38,10 @@ def draw_button(button_text,button_x,button_y,button_width,button_height,(r,g,b)
     popMatrix()
 
 #play() and leaderboard() must be defined like below
-'''def play():
+def play():
     if playing_pass==True:
         background(255,0,0)
 def leaderboard():
     if leaderboard_pass==True:
-        background(0,255,255)'''
+        background(0,255,255)
+
