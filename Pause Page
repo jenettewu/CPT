@@ -1,0 +1,6 @@
+def pause():
+    if pause_pass==True:
+        fill(0,240,89,150)
+        rect(20,20,600,440)
+        draw_button("EXIT",100,300,100,100,(255,0,0))
+# doesn't work Runtime Error
