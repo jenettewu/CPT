@@ -4,11 +4,12 @@ playing_pass=False
 leaderboard_pass=False
 pause_pass=False
 def draw():
-    global page
+    menu()
+    
+def menu():
     background(255)
     draw_button("PLAY",170,190,300,80,(239,201,239))
     draw_button("LEADERBOARD",170,300,300,80,(239,201,239))
-    
     play()
     leaderboard()
 
