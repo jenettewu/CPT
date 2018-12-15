@@ -47,11 +47,12 @@ def draw_button(button_text,button_x,button_y,button_width,button_height,(r,g,b)
     
 fish_x = 320
 fish_y = 240
+fish_size_width=50
+fish_size_height=50
 def fish_movement():
-    global fish_x
-    global fish_y
+    global fish_x,fish_y,fish_size_width,fish_size_height
     fill(0)
-    ellipse(fish_x, fish_y, 50, 50)
+    ellipse(fish_x, fish_y, fish_size_width, fish_size_height)
     if fish_x<0-25:
         fish_x=640+25
     elif fish_x>640+25:
