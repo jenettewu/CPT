@@ -1,0 +1,41 @@
+fish_x = 320
+fish_y = 240
+fish_size_width=50
+fish_size_height=50
+def fish_movement():
+    global fish_x,fish_y,fish_size_width,fish_size_height
+    fill(0)
+    ellipse(fish_x, fish_y, fish_size_width, fish_size_height)
+    if fish_x<0-25:
+        fish_x=640+25
+    elif fish_x>640+25:
+        fish_x=0-25
+    
+def keyPressed():
+    global fish_x
+    global fish_y
+    if key == CODED:
+        if keyCode == UP:
+            fish_y -= 5
+        elif keyCode == DOWN:
+            fish_y += 5
+        elif keyCode == RIGHT:
+            fish_x += 5
+        elif keyCode == LEFT:
+            fish_x -= 5
+
+def play():
+    global fish_x,fish_y,fish_movement
+    if playing_pass==True:
+        background(110,197,233)
+        fill(245,225,125)
+        rect(0,400,648,80)    
+        fill(110,197,233,100)
+        rect(0,0,640,480)
+        fish_movement()
+        draw_button("",570,30,50,50,(230,230,0))
+        fill(0)
+        rect(580,40,10,30)
+        rect(600,40,10,30)
+        pause()
+        
