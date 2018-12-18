@@ -1,13 +1,20 @@
 def setup():
     size(640,480)
+    global seaweed
+    seaweed=loadImage("seaweed.png")
+    seaweed.resize(100,200)
 playing_pass=False
 leaderboard_pass=False
+pause_pass=False
 def draw():
-    global page
-    background(255)
     menu()
 def menu():
+    background("#6EC5E9")
+    image(seaweed,100,300)
+    image(seaweed,300,300)
     draw_button("PLAY",170,190,300,80,(239,201,239))
+    fill(255)
+    triangle(410,210,410,250,450,230)
     draw_button("LEADERBOARD",170,300,300,80,(239,201,239))
     play()
     leaderboard()
