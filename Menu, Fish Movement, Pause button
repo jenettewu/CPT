@@ -105,22 +105,32 @@ o_fish_height=random(5,20)
 o_fish_y=random(o_fish_width+10,480-o_fish_width)
 points=0
 update_points=0
+score=0
 def other_fish():
-    global o_fish_x,o_fish_y,o_fish_width,o_fish_height,points,update_points,fish_size_width,fish_size_height
+    global o_fish_x,o_fish_y,o_fish_width,o_fish_height,points,update_points,fish_size_width,fish_size_height,death_pass,score
     ellipse(o_fish_x,o_fish_y,o_fish_width,o_fish_height)
     o_fish_x+=2
     if o_fish_x> 640:
         o_fish_x=0
         o_fish_y=240
-        o_fish_width=random(5,20)
-        o_fish_width=o_fish_height + random(1,20)
+        o_fish_height= random(5,100)
+        o_fish_width= o_fish_height + random(1,20)
 
-     
     if o_fish_x in range(int(fish_x-fish_size_width/2+o_fish_width/2),int(fish_x+fish_size_width/2-o_fish_width/2)) and o_fish_y in range(int(fish_y-fish_size_height/2+o_fish_height/2),int(fish_y+fish_size_height/2-o_fish_height/2)):
-        points+=1
+        if fish_size_height>o_fish_height:
+            points+=1
+  
     if points!=update_points:
-        fish_size_width+=1
-        fish_size_height+=1
+        score+=int(o_fish_width + o_fish_height)/10
+        fish_size_width+=(o_fish_width + o_fish_height)/10
+        fish_size_height+=(o_fish_width + o_fish_height)/10
         o_fish_x=1000
         update_points=points
+    show_score()
+
+def show_score():
+    global score
+    text(score,80,80)
+
+
     
