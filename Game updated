@@ -59,10 +59,14 @@ def fish_movement():
     global fish_x, fish_y, fish_size_width, fish_size_height
     fill(0)
     ellipse(fish_x, fish_y, fish_size_width, fish_size_height)
-    if fish_x < 0-25:
-        fish_x = 640 + 25
-    elif fish_x > 640 + 25:
-        fish_x = 0 - 25
+    if fish_x < -25:
+        fish_x = 665
+    elif fish_x > 665:
+        fish_x = -25
+    elif fish_y < -25:
+        fish_y = 510
+    elif fish_y > 510:
+        fish_y = -25
     
 def keyPressed():
     global fish_x
