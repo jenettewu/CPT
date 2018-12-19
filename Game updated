@@ -1,8 +1,10 @@
 def setup():
     size(640,480)
-playing_pass=False
-leaderboard_pass=False
-pause_pass=False
+playing_pass = False
+leaderboard_pass = False
+pause_pass = False
+menu_screen = True
+
 def draw():
     menu()
     
@@ -15,34 +17,39 @@ def menu():
     play()
     leaderboard()
 
-def draw_button(button_text,button_x,button_y,button_width,button_height,(r,g,b)):
-    global playing_pass,leaderboard_pass,pause_pass
+def draw_button(button_text, button_x, button_y, button_width, button_height, (r,g,b)):
+    global playing_pass, leaderboard_pass, pause_pass
     noStroke()
     
-    rect(button_x,button_y,button_width,button_height)
-    if mouseX in range(button_x,button_x+button_width) and mouseY in range(button_y,button_y+button_height):
-        fill(r-50,g-50,b-50)
+    rect(button_x, button_y, button_width, button_height)
+    if mouseX in range(button_x, button_x + button_width) and mouseY in range(button_y,button_y+button_height):
+        fill(r-50, g-50, b-50)
         if mousePressed:
-            if button_text=="PLAY":
-                playing_pass=True
-            elif button_text=="LEADERBOARD":
-                leaderboard_pass=True 
-            elif button_text=="":
-                pause_pass=True
-            elif button_text=="EXIT":
-                menu()
+            if button_text== "PLAY":
+                playing_pass = True
+                menu_screen = False
+                pause_pass = True
+            elif button_text == "LEADERBOARD":
+                leaderboard_pass = True 
+            elif button_text == "":
+                pause_pass = True
+            elif button_text == "EXIT":
+                menu_screen = True
+                playing_pass = False
+           elif button_text == "RESUME":
+                pause_pass = False
 
     else:
-        fill(r,g,b)
+        fill(r, g, b)
 
-    rect(button_x,button_y,button_width,button_height)
+    rect(button_x, button_y, button_width, button_height)
     
     fill(255)
     textSize(30)
     textAlign(CENTER,CENTER)
     pushMatrix()
-    translate(button_x,button_y)
-    text(button_text,button_width/2,button_height/2)
+    translate(button_x, button_y)
+    text(button_text, button_width/2, button_height/2)
     popMatrix()
     
 fish_x = 320
@@ -50,13 +57,13 @@ fish_y = 240
 fish_size_width=50
 fish_size_height=50
 def fish_movement():
-    global fish_x,fish_y,fish_size_width,fish_size_height
+    global fish_x, fish_y, fish_size_width, fish_size_height
     fill(0)
     ellipse(fish_x, fish_y, fish_size_width, fish_size_height)
-    if fish_x<0-25:
-        fish_x=640+25
-    elif fish_x>640+25:
-        fish_x=0-25
+    if fish_x < 0-25:
+        fish_x = 640 + 25
+    elif fish_x > 640 + 25:
+        fish_x = 0 - 25
     
 def keyPressed():
     global fish_x
@@ -76,61 +83,63 @@ def keyPressed():
 def play():
     global fish_x,fish_y,fish_movement
     if playing_pass==True:
-        background(110,197,233)
-        fill(245,225,125)
-        rect(0,400,648,80)    
-        fill(110,197,233,100)
-        rect(0,0,640,480)
+        background(110, 197, 233)
+        fill(245, 225, 125)
+        rect(0, 400, 648, 80)    
+        fill(110, 197, 233, 100)
+        rect(0, 0, 640, 480)
         fish_movement()
-        draw_button("",570,30,50,50,(230,230,0))
+        draw_button("", 570, 30, 50, 50,(230, 230, 0))
         fill(0)
-        rect(580,40,10,30)
-        rect(600,40,10,30)
+        rect(580, 40, 10, 30)
+        rect(600, 40, 10, 30)
         other_fish()
         pause()
         
 #leaderboard() and pause() must be defined like below
 def leaderboard():
-    if leaderboard_pass==True:
-        background(0,255,255)
+    if leaderboard_pass == True:
+        background(0, 255, 255)
 def pause():
-    if pause_pass==True:
-        fill(0,240,89,150)
-        rect(20,20,600,440)
-        draw_button("EXIT",100,300,100,100,(255,0,0))
+    if pause_pass == True:
+        fill(0, 240, 89, 150)
+        rect(20, 20, 600, 440)
+        draw_button("RESUME", 400, 300, 150, 100,(255, 0, 0))
+        draw_button("EXIT", 100, 300, 100, 100,(255, 0, 0))
 
 o_fish_x=641
-o_fish_width=random(5,20)
-o_fish_height=random(5,20)
-o_fish_y=random(o_fish_width+10,480-o_fish_width)
-points=0
-update_points=0
-score=0
+o_fish_width=random(5, 20)
+o_fish_height=random(5, 20)
+o_fish_y=random(o_fish_width + 10, 480-o_fish_width)
+points = 0
+update_points = 0
+score = 0
 def other_fish():
-    global o_fish_x,o_fish_y,o_fish_width,o_fish_height,points,update_points,fish_size_width,fish_size_height,death_pass,score
-    ellipse(o_fish_x,o_fish_y,o_fish_width,o_fish_height)
-    o_fish_x+=2
-    if o_fish_x> 640:
-        o_fish_x=0
-        o_fish_y=240
-        o_fish_height= random(5,100)
-        o_fish_width= o_fish_height + random(1,20)
+    global o_fish_x, o_fish_y, o_fish_width, o_fish_height, points, update_points, fish_size_width, fish_size_height, death_pass, score
+    ellipse(o_fish_x, o_fish_y, o_fish_width, o_fish_height)
+    o_fish_x += 2
+    if o_fish_x > 640:
+        o_fish_x = 0
+        o_fish_y = 240
+        o_fish_height = random(5, 100)
+        o_fish_width = o_fish_height + random(1, 20)
 
-    if o_fish_x in range(int(fish_x-fish_size_width/2+o_fish_width/2),int(fish_x+fish_size_width/2-o_fish_width/2)) and o_fish_y in range(int(fish_y-fish_size_height/2+o_fish_height/2),int(fish_y+fish_size_height/2-o_fish_height/2)):
-        if fish_size_height>o_fish_height:
-            points+=1
+    if o_fish_x in range(int(fish_x - fish_size_width/2 + o_fish_width/2),int(fish_x + fish_size_width/2 - o_fish_width/2)) and o_fish_y in range(int(fish_y - fish_size_height/2 + o_fish_height/2), int(fish_y + fish_size_height/2 - o_fish_height/2)):
+        if fish_size_height > o_fish_height:
+            points += 1
   
-    if points!=update_points:
-        score+=int(o_fish_width + o_fish_height)/10
-        fish_size_width+=(o_fish_width + o_fish_height)/10
-        fish_size_height+=(o_fish_width + o_fish_height)/10
-        o_fish_x=1000
-        update_points=points
+    if points != update_points:
+        score += int(o_fish_width + o_fish_height)/10
+        fish_size_width += (o_fish_width + o_fish_height)/10
+        fish_size_height += (o_fish_width + o_fish_height)/10
+        o_fish_x = 1000
+        update_points = points
     show_score()
 
 def show_score():
     global score
-    text(score,80,80)
+    text(score, 80, 80)
 
 
     
+
