@@ -1,5 +1,5 @@
 def setup():
-    size(640,480)
+    size(640, 480)
 playing_pass = False
 leaderboard_pass = False
 pause_pass = False
@@ -10,22 +10,22 @@ def draw():
     
 def menu():
     background("#6EC5E9")
-    draw_button("PLAY",170,190,300,80,(239,201,239))
+    draw_button("PLAY", 170, 190, 300, 80, (239, 201, 239))
     fill(255)
-    triangle(410,210,410,250,450,230)
-    draw_button("LEADERBOARD",170,300,300,80,(239,201,239))
+    triangle(410, 210, 410, 250, 450, 230)
+    draw_button("LEADERBOARD", 170, 300, 300, 80, (239, 201,2 39))
     play()
     leaderboard()
 
-def draw_button(button_text, button_x, button_y, button_width, button_height, (r,g,b)):
+def draw_button(button_text, button_x, button_y, button_width, button_height, (r, g, b)):
     global playing_pass, leaderboard_pass, pause_pass
     noStroke()
     
     rect(button_x, button_y, button_width, button_height)
-    if mouseX in range(button_x, button_x + button_width) and mouseY in range(button_y,button_y+button_height):
-        fill(r-50, g-50, b-50)
+    if mouseX in range(button_x, button_x + button_width) and mouseY in range(button_y, button_y+button_height):
+        fill(r - 50, g - 50, b - 50)
         if mousePressed:
-            if button_text== "PLAY":
+            if button_text == "PLAY":
                 playing_pass = True
                 menu_screen = False
             elif button_text == "LEADERBOARD":
@@ -53,8 +53,8 @@ def draw_button(button_text, button_x, button_y, button_width, button_height, (r
     
 fish_x = 320
 fish_y = 240
-fish_size_width=50
-fish_size_height=50
+fish_size_width = 50
+fish_size_height = 50
 def fish_movement():
     global fish_x, fish_y, fish_size_width, fish_size_height
     fill(0)
@@ -80,15 +80,15 @@ def keyPressed():
 
 
 def play():
-    global fish_x,fish_y,fish_movement
-    if playing_pass==True:
+    global fish_x, fish_y, fish_movement
+    if playing_pass == True:
         background(110, 197, 233)
         fill(245, 225, 125)
         rect(0, 400, 648, 80)    
         fill(110, 197, 233, 100)
         rect(0, 0, 640, 480)
         fish_movement()
-        draw_button("", 570, 30, 50, 50,(230, 230, 0))
+        draw_button("", 570, 30, 50, 50, (230, 230, 0))
         fill(0)
         rect(580, 40, 10, 30)
         rect(600, 40, 10, 30)
@@ -103,13 +103,13 @@ def pause():
     if pause_pass == True:
         fill(0, 240, 89, 150)
         rect(20, 20, 600, 440)
-        draw_button("RESUME", 400, 300, 150, 100,(255, 0, 0))
-        draw_button("EXIT", 100, 300, 100, 100,(255, 0, 0))
+        draw_button("RESUME", 400, 300, 150, 100, (255, 0, 0))
+        draw_button("EXIT", 100, 300, 100, 100, (255, 0, 0))
 
-o_fish_x=641
-o_fish_width=random(5, 20)
-o_fish_height=random(5, 20)
-o_fish_y=random(o_fish_width + 10, 480-o_fish_width)
+o_fish_x = 641
+o_fish_width = random(5, 20)
+o_fish_height = random(5, 20)
+o_fish_y = random(o_fish_width + 10, 480-o_fish_width)
 points = 0
 update_points = 0
 score = 0
@@ -123,7 +123,7 @@ def other_fish():
         o_fish_height = random(5, 100)
         o_fish_width = o_fish_height + random(1, 20)
 
-    if o_fish_x in range(int(fish_x - fish_size_width/2 + o_fish_width/2),int(fish_x + fish_size_width/2 - o_fish_width/2)) and o_fish_y in range(int(fish_y - fish_size_height/2 + o_fish_height/2), int(fish_y + fish_size_height/2 - o_fish_height/2)):
+    if o_fish_x in range(int(fish_x - fish_size_width/2 + o_fish_width/2), int(fish_x + fish_size_width/2 - o_fish_width/2)) and o_fish_y in range(int(fish_y - fish_size_height/2 + o_fish_height/2), int(fish_y + fish_size_height/2 - o_fish_height/2)):
         if fish_size_height > o_fish_height:
             points += 1
   
