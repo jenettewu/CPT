@@ -36,7 +36,7 @@ def draw_button(button_text, button_x, button_y, button_width, button_height, (r
             elif button_text == "EXIT":
                 menu_screen = True
                 playing_pass = False
-           elif button_text == "RESUME":
+            elif button_text == "RESUME":
                 pause_pass = False
 
     else:
