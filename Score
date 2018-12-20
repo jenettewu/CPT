@@ -29,4 +29,5 @@ def other_fish():
 
 def show_score():
     global score
-    text(score,80,80)
+    textSize(25)
+    text("Score: " + str(score), 80, 50)
