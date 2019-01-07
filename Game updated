@@ -4,6 +4,7 @@ playing_pass = False
 leaderboard_pass = False
 pause_pass = False
 menu_screen = True
+death = False
 
 def draw():
     menu()
@@ -25,7 +26,7 @@ def draw_button(button_text, button_x, button_y, button_width, button_height, (r
     if mouseX in range(button_x, button_x + button_width) and mouseY in range(button_y, button_y+button_height):
         fill(r - 50, g - 50, b - 50)
         if mousePressed:
-            if button_text == "PLAY":
+            if button_text == "PLAY" or button_text == "RESTART":
                 playing_pass = True
                 menu_screen = False
             elif button_text == "LEADERBOARD":
@@ -98,6 +99,8 @@ def play():
         rect(600, 40, 10, 30)
         other_fish()
         pause()
+        death_screen()
+        
         
 #leaderboard() and pause() must be defined like below
 def leaderboard():
@@ -118,7 +121,7 @@ points = 0
 update_points = 0
 score = 0
 def other_fish():
-    global o_fish_x, o_fish_y, o_fish_width, o_fish_height, points, update_points, fish_size_width, fish_size_height, death_pass, score
+    global o_fish_x, o_fish_y, o_fish_width, o_fish_height, points, update_points, fish_size_width, fish_size_height, death_pass, score ,death
     ellipse(o_fish_x, o_fish_y, o_fish_width, o_fish_height)
     o_fish_x += 2
     if o_fish_x > 640:
@@ -126,11 +129,14 @@ def other_fish():
         o_fish_y = 240
         o_fish_height = random(5, 100)
         o_fish_width = o_fish_height + random(1, 20)
-
-    if o_fish_x in range(int(fish_x - fish_size_width/2 + o_fish_width/2), int(fish_x + fish_size_width/2 - o_fish_width/2)) and o_fish_y in range(int(fish_y - fish_size_height/2 + o_fish_height/2), int(fish_y + fish_size_height/2 - o_fish_height/2)):
-        if fish_size_height > o_fish_height:
+    
+    if fish_size_height > o_fish_height:
+        if o_fish_x in range(int(fish_x - fish_size_width/2 + o_fish_width/2), int(fish_x + fish_size_width/2 - o_fish_width/2)) and o_fish_y in range(int(fish_y - fish_size_height/2 + o_fish_height/2), int(fish_y + fish_size_height/2 - o_fish_height/2)):
             points += 1
-  
+    elif fish_size_height + 5 < o_fish_height:
+        if fish_x in range(int(o_fish_x - o_fish_x/2 + fish_size_width/2.5), int(o_fish_x + o_fish_width/2 - fish_size_width/2.5)) and fish_x in range(int(o_fish_y - o_fish_y/2 + fish_size_height/2.5), int(o_fish_y + o_fish_y/2 - fish_size_height/2.5)):
+            death = True
+
     if points != update_points:
         score += int(o_fish_width + o_fish_height)/10
         fish_size_width += (o_fish_width + o_fish_height)/10
@@ -139,11 +145,25 @@ def other_fish():
         update_points = points
     show_score()
 
+def death_screen():
+    if death == True:
+        background("#6EC5E9")
+        global score
+    
+        textSize(60)
+        fill(0)
+        textAlign(CENTER, CENTER)
+        text("YOU DIED!", 320, 100)
+        textSize(30)
+        text("YOUR SCORE: " + str(score), 320, 200)
+        
+        draw_button("EXIT", 120, 300, 140, 140, (239, 201, 239))
+        draw_button("RESTART", 400, 300, 140, 140, (239, 201, 239))
+        
+    
+    
+    
 def show_score():
     global score
     textSize(25)
-    text("Score: " + str(score), 80, 50)
-
-
-    
-
+    text("Score: " + str(score),80,50)
