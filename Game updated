@@ -110,9 +110,10 @@ def pause():
     if pause_pass == True:
         fill(0, 240, 89, 150)
         rect(20, 20, 600, 440)
-        draw_button("RESUME", 400, 300, 150, 100, (255, 0, 0))
-        draw_button("EXIT", 100, 300, 100, 100, (255, 0, 0))
-
+        draw_button("RESUME", 450, 300, 140, 140, (255, 0, 0))
+        draw_button("RESTART", 260, 300, 140, 140, (255, 0, 0))
+        draw_button("EXIT", 70, 300, 140, 140, (255, 0, 0))
+        
 o_fish_x = 641
 o_fish_width = random(5, 20)
 o_fish_height = random(5, 20)
