@@ -2,7 +2,7 @@ def setup():
     size(640,480)
 
 
-o_fish_xcoordinates=[[0,100,600,640]
+o_fish_xcoordinates=[[0,100],[600,640]]
 o_fish_ycoordinates=[]
 
 for i in range(6):
@@ -13,8 +13,7 @@ fish_num=0
 def draw():
     global o_fish_xcoordinates, o_fish_ycoordinates, o_fish_x, o_fish_y, fish_num
     while fish_num < len(o_fish_ycoordinates):
-        o_fish_x=o_fish_xcoordinates[(int(round(random(0,1))))]
+        o_fish_x=o_fish_xcoordinates[(int(round(random(0,1))))][(int(round(random(0,1))))]
         o_fish_y=o_fish_ycoordinates[fish_num]
         ellipse(o_fish_x,o_fish_y,60,60)
         fish_num+=1
-    
