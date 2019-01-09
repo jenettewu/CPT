@@ -5,6 +5,7 @@ leaderboard_pass = False
 pause_pass = False
 menu_screen = True
 death = False
+looping = True
 
 def draw():
     menu()
@@ -81,8 +82,15 @@ def keyPressed():
             fish_x += 5
         elif keyCode == LEFT:
             fish_x -= 5
-
-
+            
+    if key == ' ':
+        global looping
+        if looping == True:
+            looping = False
+            noLoop()
+        elif looping == False:
+            looping = True
+            loop()
 
 def play():
     global fish_x, fish_y, fish_movement
@@ -93,26 +101,13 @@ def play():
         fill(110, 197, 233, 100)
         rect(0, 0, 640, 480)
         fish_movement()
-        draw_button("", 570, 30, 50, 50, (230, 230, 0))
-        fill(0)
-        rect(580, 40, 10, 30)
-        rect(600, 40, 10, 30)
         other_fish()
-        pause()
         death_screen()
-        
         
 #leaderboard() and pause() must be defined like below
 def leaderboard():
     if leaderboard_pass == True:
         background(0, 255, 255)
-def pause():
-    if pause_pass == True:
-        fill(0, 240, 89, 150)
-        rect(20, 20, 600, 440)
-        draw_button("RESUME", 450, 300, 140, 140, (255, 0, 0))
-        draw_button("RESTART", 260, 300, 140, 140, (255, 0, 0))
-        draw_button("EXIT", 70, 300, 140, 140, (255, 0, 0))
         
 o_fish_x = 641
 o_fish_width = random(5, 20)
@@ -161,9 +156,6 @@ def death_screen():
         
         draw_button("EXIT", 120, 300, 140, 140, (239, 201, 239))
         draw_button("RESTART", 400, 300, 140, 140, (239, 201, 239))
-        
-    
-    
     
 def show_score():
     global score
