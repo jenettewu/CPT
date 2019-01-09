@@ -1,0 +1,22 @@
+        if mousePressed:
+            elif button_text == "BACK":
+                leaderboard_pass = False
+
+
+number_of_games = 0
+word_height = 340
+def leaderboard():
+    global number_of_games, word_height
+    if leaderboard_pass == True:
+        background(0, 255, 255)
+        rect(120,40,400,400)
+        textSize(32)
+        fill(0, 102, 153)
+        text("LEADERBOARD", 315, 70)
+        draw_button("BACK", 525, 350, 100, 70, (255, 0, 0))
+    if death == True:
+        number_of_games + 1 
+        word_height + 25
+        textSize(20)
+        fill(0, 102, 153)
+        text("Game"+ number_of_games, word_height, 70)
