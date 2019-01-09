@@ -135,7 +135,7 @@ def other_fish():
         if o_fish_x in range(int(fish_x - fish_size_width/2 + o_fish_width/2), int(fish_x + fish_size_width/2 - o_fish_width/2)) and o_fish_y in range(int(fish_y - fish_size_height/2 + o_fish_height/2), int(fish_y + fish_size_height/2 - o_fish_height/2)):
             points += 1
     elif fish_size_height + 5 < o_fish_height:
-        if fish_x in range(int(o_fish_x - o_fish_x/2 + fish_size_width/2.5), int(o_fish_x + o_fish_width/2 - fish_size_width/2.5)) and fish_x in range(int(o_fish_y - o_fish_y/2 + fish_size_height/2.5), int(o_fish_y + o_fish_y/2 - fish_size_height/2.5)):
+        if fish_x in range(int(o_fish_x - o_fish_x/2 + fish_size_width/2.5), int(o_fish_x + o_fish_width/2 - fish_size_width/2.5)) and fish_y in range(int(o_fish_y - o_fish_y/2 + fish_size_height/2.5), int(o_fish_y + o_fish_y/2 - fish_size_height/2.5)):
             death = True
 
     if points != update_points:
