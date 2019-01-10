@@ -51,36 +51,19 @@ def draw_button(button_text, button_x, button_y, button_width, button_height, (r
     text(button_text, button_width/2, button_height/2)
     popMatrix()
     
-fish_x = 320
-fish_y = 240
+fish_x = 0
+fish_y = 0
 fish_size_width = 50
 fish_size_height = 50
+
 def fish_movement():
     global fish_x, fish_y, fish_size_width, fish_size_height
     fill(0)
     ellipse(fish_x, fish_y, fish_size_width, fish_size_height)
-    if fish_x < -25:
-        fish_x = 665
-    elif fish_x > 665:
-        fish_x = -25
-    elif fish_y < -25:
-        fish_y = 510
-    elif fish_y > 510:
-        fish_y = -25
+    fish_x = mouseX
+    fish_y = mouseY
     
 def keyPressed():
-    global fish_x
-    global fish_y
-    if key == CODED:
-        if keyCode == UP:
-            fish_y -= 5
-        elif keyCode == DOWN:
-            fish_y += 5
-        elif keyCode == RIGHT:
-            fish_x += 5
-        elif keyCode == LEFT:
-            fish_x -= 5
-            
     if key == ' ':
         global looping
         if looping == True:
