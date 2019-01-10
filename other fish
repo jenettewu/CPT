@@ -1,19 +1,52 @@
 def setup():
     size(640,480)
+    background(0,0,255)
 
-
-o_fish_xcoordinates=[[0,100],[600,640]]
 o_fish_ycoordinates=[]
-
-for i in range(6):
+o_fish_xcoordinates=[]
+fish_num = 0
+for i in range(5):
     o_fish_ycoordinates.append(int(random(50,430)))
+    o_fish_xcoordinates.append(int(random(2)))
+
+for fish_num in range(len(o_fish_xcoordinates)):
+    if o_fish_xcoordinates[fish_num] == 0:
+        o_fish_xcoordinates[fish_num] = int(random(20,200))
+    else:
+        o_fish_xcoordinates[fish_num] = int(random(500,620))
+
+def other_fish():
+    global o_fish_xcoordinates, o_fish_ycoordinates, fish_num, o_fish_x, o_fish_y
+    noStroke()
+    for fish_num in range(5):
+        ellipse(o_fish_xcoordinates[fish_num], o_fish_ycoordinates[fish_num], 60,50)
+        for fish_move in range(1,100):
+            o_fish_xcoordinates[fish_num] = o_fish_xcoordinates[fish_num]+fish_move
+
+    # while fish_num < len(o_fish_ycoordinates):
+    #     o_fish_y = o_fish_ycoordinates[fish_num]
+    #     if o_fish_xcoordinates[fish_num] == 0:
+    #         o_fish_x = random(20,200)
+    #     else:
+    #         o_fish_x = random(500,620)
+    #     ellipse(o_fish_x, o_fish_y, 60,50)
+    #     fish_num+=1
+
+
+    
+        # for i in range(len(o_fish_ycoordinates)):
+        #     o_fish_xcoordinates[i] = o_fish_xcoordinates[i]+1
         
 
-fish_num=0
+    # for fish_num in range(5):
+    #     o_fish_y = o_fish_ycoordinates[fish_num]
+    #     if o_fish_xcoordinates[fish_num] == 0:
+    #         o_fish_x = random(20,200)
+    #     else:
+    #         o_fish_x = random(500,620)
+    #     ellipse(o_fish_x, o_fish_y, 60,50)
+        
 def draw():
-    global o_fish_xcoordinates, o_fish_ycoordinates, o_fish_x, o_fish_y, fish_num
-    while fish_num < len(o_fish_ycoordinates):
-        o_fish_x=o_fish_xcoordinates[(int(round(random(0,1))))][(int(round(random(0,1))))]
-        o_fish_y=o_fish_ycoordinates[fish_num]
-        ellipse(o_fish_x,o_fish_y,60,60)
-        fish_num+=1
+    other_fish()
+    
+        
