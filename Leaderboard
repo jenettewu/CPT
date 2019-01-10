@@ -4,8 +4,10 @@
 
 number_of_games = 1
 word_height = 140
+game_scores = [10,15,9]
+rank = 0
 def leaderboard():
-    global number_of_games, word_height
+    global number_of_games, word_height, score
     if leaderboard_pass == True:
         background(0, 255, 255)
         rect(120,40,400,400)
@@ -15,8 +17,11 @@ def leaderboard():
         draw_button("BACK", 525, 350, 100, 70, (255, 0, 0))
         textSize(24)
         fill(0, 102, 153)
-        text("Game " + str(number_of_games),180, word_height)
-        text("score " + str(score),280, word_height)
+        text("Game " + str(number_of_games)+ "            score " + str(game_scores[rank]),280, word_height)
     elif death == True:
         number_of_games + 1 
         word_height + 20
+        rank + 1
+        game_scores.append(score)
+        for scores in game_scores:
+            game_scores.sort()
