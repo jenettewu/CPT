@@ -16,8 +16,8 @@ def menu():
     fill(255)
     triangle(410, 210, 410, 250, 450, 230)
     draw_button("LEADERBOARD", 170, 300, 300, 80, (239, 201, 239))
-    play()
     leaderboard()
+    play()
 
 def draw_button(button_text, button_x, button_y, button_width, button_height, (r, g, b)):
     global playing_pass, leaderboard_pass, pause_pass
