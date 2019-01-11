@@ -1,0 +1,17 @@
+def setup():
+    size(640,480)
+o_fish_xcoordinates[fish_num]=300
+o_fish_ycoordinates[fish_num]=200
+o_fish_length[fish_num]=300
+o_fish_width[fish_num]=200
+def draw():
+    noStroke()
+    fill(255)
+    ellipse(o_fish_xcoordinates[fish_num],o_fish_ycoordinates[fish_num],o_fish_length[fish_num],o_fish_width[fish_num])
+    triangle(o_fish_xcoordinates[fish_num]+o_fish_length[fish_num]/3, o_fish_ycoordinates[fish_num], o_fish_xcoordinates[fish_num]+o_fish_length[fish_num]/2+o_fish_length[fish_num]/4, o_fish_ycoordinates[fish_num]-o_fish_width[fish_num]/3, o_fish_xcoordinates[fish_num]+o_fish_length[fish_num]/2+o_fish_length[fish_num]/4, o_fish_ycoordinates[fish_num]+o_fish_width[fish_num]/3)
+    quad(o_fish_xcoordinates[fish_num], o_fish_ycoordinates[fish_num]-o_fish_width[fish_num]/5,  o_fish_xcoordinates[fish_num]+o_fish_length[fish_num]/4.5, o_fish_ycoordinates[fish_num]-o_fish_width[fish_num]/2-o_fish_width[fish_num]/4.5, o_fish_xcoordinates[fish_num]+o_fish_length[fish_num]/2, o_fish_ycoordinates[fish_num]-o_fish_width[fish_num]/2-o_fish_width[fish_num]/5.5, o_fish_xcoordinates[fish_num]+o_fish_length[fish_num]/6, o_fish_ycoordinates[fish_num]-o_fish_width[fish_num]/4 )
+    quad(o_fish_xcoordinates[fish_num], o_fish_ycoordinates[fish_num]+o_fish_width[fish_num]/5,  o_fish_xcoordinates[fish_num]+o_fish_length[fish_num]/4.5, o_fish_ycoordinates[fish_num]+o_fish_width[fish_num]/2+o_fish_width[fish_num]/4.5, o_fish_xcoordinates[fish_num]+o_fish_length[fish_num]/2, o_fish_ycoordinates[fish_num]+o_fish_width[fish_num]/2+o_fish_width[fish_num]/5.5, o_fish_xcoordinates[fish_num]+o_fish_length[fish_num]/6, o_fish_ycoordinates[fish_num]+o_fish_width[fish_num]/4 )
+    stroke(0)
+    ellipse(o_fish_xcoordinates[fish_num]-o_fish_length[fish_num]/4, o_fish_ycoordinates[fish_num]-o_fish_width[fish_num]/8, o_fish_width[fish_num]/3.5, o_fish_width[fish_num]/3.5)
+    fill(0)
+    ellipse(o_fish_xcoordinates[fish_num]-o_fish_length[fish_num]/4, o_fish_ycoordinates[fish_num]-o_fish_width[fish_num]/8, o_fish_width[fish_num]/7, o_fish_width[fish_num]/7)
