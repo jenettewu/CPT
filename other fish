@@ -4,29 +4,44 @@ def setup():
 
 o_fish_ycoordinates=[]
 o_fish_xcoordinates=[]
-fish_num = 0
-for i in range(5):
+o_fish_length=[]
+o_fish_width=[]
+speed=[]
+
+for fish_num in range(8):
     o_fish_ycoordinates.append(int(random(50,430)))
     o_fish_xcoordinates.append(int(random(2)))
+    o_fish_width.append(random(5,100))
+    o_fish_length.append(o_fish_width[fish_num]+o_fish_width[fish_num]/2)
 
-for fish_num in range(len(o_fish_xcoordinates)):
     if o_fish_xcoordinates[fish_num] == 0:
-        o_fish_xcoordinates[fish_num] = int(random(-140,-40))
+        o_fish_xcoordinates[fish_num] = int(random(-400,-40))
+        speed.append(random(1,2))
     else:
-        o_fish_xcoordinates[fish_num] = int(random(700,800))
-
-fish_pos=[]    
+        o_fish_xcoordinates[fish_num] = int(random(940,680))
+        speed.append(-(random(1,2)))
+       
+fish_pos=[]
 def draw():
-    global fish_pos
+    other_fish()
+def other_fish():
+    global fish_pos, speed, o_fish_length, o_fish_width
     background(0,0,255)
     noStroke()
-    for fish_num in range(5):
-        ellipse(o_fish_xcoordinates[fish_num], o_fish_ycoordinates[fish_num],60,50)
-        fish_pos.append(o_fish_xcoordinates[fish_num])
-    for fish in range(5):
-        if o_fish_xcoordinates[fish] >= 640:
-            fish_pos[fish] += -1
-        else:
-            fish_pos[fish] += 1
-        o_fish_xcoordinates[fish] = fish_pos[fish]
+    for fish_num in range(8):
+        ellipse(o_fish_xcoordinates[fish_num], o_fish_ycoordinates[fish_num], o_fish_length[fish_num],o_fish_width[fish_num])
+        noStroke()
     
+        fish_pos.append(o_fish_xcoordinates[fish_num])
+        fish_pos[fish_num] += speed[fish_num]
+        o_fish_xcoordinates[fish_num] = fish_pos[fish_num]
+
+        if (speed[fish_num] < 0 and o_fish_xcoordinates[fish_num] < -100) or (speed[fish_num] > 0 and o_fish_xcoordinates[fish_num] > 700):
+            o_fish_ycoordinates[fish_num] = (int(random(50,430)))
+            o_fish_xcoordinates[fish_num] = (int(random(2)))
+            if o_fish_xcoordinates[fish_num] == 0:
+                o_fish_xcoordinates[fish_num] = int(random(-140,-40))
+                speed[fish_num] =(random(1,2))
+            else:
+                o_fish_xcoordinates[fish_num] = int(random(700,800))
+                speed[fish_num] = (-(random(1,2)))
