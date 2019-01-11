@@ -157,8 +157,8 @@ def death_screen():
         textSize(30)
         text("YOUR SCORE: " + str(score), 320, 200)
         
-        draw_button("EXIT", 120, 300, 140, 140, (239, 201, 239))
-        draw_button("RESTART", 400, 300, 140, 140, (239, 201, 239))
+        draw_button("EXIT", 30, 300, 140, 140, (239, 201, 239))
+        draw_button("RESTART", 460, 300, 140, 140, (239, 201, 239))
     
 def show_score():
     global score
