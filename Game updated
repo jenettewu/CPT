@@ -83,8 +83,8 @@ def play():
         rect(0, 400, 648, 80)    
         fill(110, 197, 233, 100)
         rect(0, 0, 640, 480)
-        fish_movement()
         other_fish()
+        fish_movement()
         death_screen()
         
         
@@ -138,7 +138,7 @@ update_points = 0
 score = 0
 def other_fish():
     #background("#6EC5E9")
-    global fish_pos, speed, o_fish_length, o_fish_width, player_fish_width, player_fish_length
+    global fish_pos, speed, o_fish_length, o_fish_width, player_fish_width, player_fish_length, death
     global points, update_points, score
     noStroke()
     for fish_num in range(8):
@@ -176,33 +176,33 @@ def other_fish():
                 o_fish_xco[fish_num] = int(random(700,800))
                 speed[fish_num] = (-(random(1,2)))
 
-        if player_fish_width > o_fish_width[fish_num]:
-            if o_fish_xco[fish_num] in range(int(player_fish_x - player_fish_length/2 + o_fish_width[fish_num]/2), int(player_fish_x + player_fish_length/2 - o_fish_width[fish_num]/2)) and o_fish_yco[fish_num] in range(int(player_fish_y - player_fish_width/2 + o_fish_height[fish_num]/2), int(player_fish_y, player_fish_width/2 - o_fish_height[fish_num]/2)):
-               points += 1
+        if player_fish_width > o_fish_width[fish_num] + 5:
+            if speed[fish_num] > 0:
+                if player_fish_x - player_fish_length/2 in range(int(o_fish_xco[fish_num]),int(o_fish_xco[fish_num] + o_fish_length[fish_num]/3)) and o_fish_yco[fish_num] in range(int(player_fish_y - player_fish_width/2), int(player_fish_y + player_fish_width/2 )):
+                    points+=1
+                    o_fish_xco[fish_num] = 800
+            if speed[fish_num] < 0:
+                if player_fish_x + player_fish_length/2 in range(int(o_fish_xco[fish_num] - o_fish_length[fish_num]/3), int(o_fish_xco[fish_num])) and o_fish_yco[fish_num] in range(int(player_fish_y - player_fish_width/2), int(player_fish_y + player_fish_width/2 )):
+                    points+=1
+                    o_fish_xco[fish_num] = -200
+    
+        if player_fish_width < o_fish_width[fish_num]:
+            if speed[fish_num] > 0:
+                if player_fish_x - player_fish_length/2 in range(int(o_fish_xco[fish_num]), int(o_fish_xco[fish_num] + o_fish_length[fish_num]/3)) and (player_fish_y + player_fish_width/2 in range(int(o_fish_yco[fish_num] - o_fish_width[fish_num]), int(o_fish_yco[fish_num] + o_fish_width[fish_num])) and player_fish_y - player_fish_width/2 in range(int(o_fish_yco[fish_num] - o_fish_width[fish_num]), int(o_fish_yco[fish_num] + o_fish_width[fish_num]))) :
+                    death =True
+            if speed[fish_num] < 0:
+                if player_fish_x + player_fish_length/2 in range(int(o_fish_xco[fish_num] - o_fish_length[fish_num]/3), int(o_fish_xco[fish_num])) and (player_fish_y + player_fish_width/2 in range(int(o_fish_yco[fish_num] - o_fish_width[fish_num]), int(o_fish_yco[fish_num] + o_fish_width[fish_num])) and player_fish_y - player_fish_width/2 in range(int(o_fish_yco[fish_num] - o_fish_width[fish_num]), int(o_fish_yco[fish_num] + o_fish_width[fish_num]))) :
+                    death = True
+        
         if points != update_points:
-            score+= int(o_fish_width + o_fish_height)/10
-            player_fish_length += (o_fish_width + o_fish_height)/10
-            player_fish_width += (o_fish_width + o_fish_height)/10
-            o_fish_xco[fish_num] = 1000
+            score+= int(o_fish_width[fish_num] + o_fish_length[fish_num])/10
+            # player_fish_length += (o_fish_length[fish_num] + o_fish_width[fish_num])/10
+            # player_fish_width += (o_fish_length[fish_num] + o_fish_width[fish_num])/10
+      
             update_points = points
         show_score()
                 
-    
-    # if player_fish_width > o_fish_height:
-    #     if o_player_fish_x in range(int(player_fish_x - player_fish_length/2 + o_fish_width/2), int(fish_x + player_fish_length/2 - o_fish_width/2)) and o_fish_y in range(int(fish_y - player_fish_width/2 + o_fish_height/2), int(fish_y + player_fish_width/2 - o_fish_height/2)):
-    #         points += 1
-    # elif player_fish_width + 5 < o_fish_height:
-    #     if fish_x in range(int(o_fish_x - o_fish_x/2 + player_fish_length/2.5), int(o_fish_x + o_fish_width/2 - player_fish_length/2.5)) and fish_y in range(int(o_fish_y - o_fish_y/2 + player_fish_width/2.5), int(o_fish_y + o_fish_y/2 - player_fish_width/2.5)):
-    #         death = True
-
-    # if points != update_points:
-    #     score += int(o_fish_width + o_fish_height)/10
-    #     player_fish_length += (o_fish_width + o_fish_height)/10
-    #     player_fish_width += (o_fish_width + o_fish_height)/10
-    #     o_fish_x = 1000
-    #     update_points = points
-    # show_score()
-
+ 
 def death_screen():
     if death == True:
         playing_pass = False
