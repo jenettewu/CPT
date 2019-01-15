@@ -202,14 +202,15 @@ def other_fish():
                 speed[fish_num] = (-(random(1, 2)))
 
         if player_fish_width > o_fish_width[fish_num] + 5:
-            if speed[fish_num] > 0:
-                if player_fish_x - player_fish_length/2 in range(int(o_fish_xco[fish_num]), int(o_fish_xco[fish_num] + o_fish_length[fish_num]/3)) and o_fish_yco[fish_num] in range(int(player_fish_y - player_fish_width/2), int(player_fish_y + player_fish_width/2 )):
-                    points += 1
-                    o_fish_xco[fish_num] = 800
-            if speed[fish_num] < 0:
-                if player_fish_x + player_fish_length/2 in range(int(o_fish_xco[fish_num] - o_fish_length[fish_num]/3), int(o_fish_xco[fish_num])) and o_fish_yco[fish_num] in range(int(player_fish_y - player_fish_width/2), int(player_fish_y + player_fish_width/2 )):
-                    points += 1
-                    o_fish_xco[fish_num] = -200
+           if speed[fish_num] > 0:
+               if player_fish_x - player_fish_length/2 in range(int(o_fish_xco[fish_num] - o_fish_xco[fish_num]/2), int(o_fish_xco[fish_num] + o_fish_length[fish_num]/3)) and o_fish_yco[fish_num] in range(int(player_fish_y - player_fish_width/2), int(player_fish_y + player_fish_width/2 )):
+                   points += 1
+                   o_fish_xco[fish_num] = 800
+           if speed[fish_num] < 0:
+               if player_fish_x + player_fish_length/2 in range(int(o_fish_xco[fish_num] - o_fish_length[fish_num]/3), int(o_fish_xco[fish_num] + o_fish_length[fish_num]/2)) and o_fish_yco[fish_num] in range(int(player_fish_y - player_fish_width/2), int(player_fish_y + player_fish_width/2 )):
+                   points += 1
+                   o_fish_xco[fish_num] = -200
+    
     
         if player_fish_width < o_fish_width[fish_num]:
             if speed[fish_num] > 0:
