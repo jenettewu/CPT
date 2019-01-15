@@ -244,6 +244,8 @@ def death_screen():
         text("YOU DIED!", 320, 100)
         textSize(30)
         text("YOUR SCORE: " + str(score), 320, 200)
+        text("HIGH SCORE: " + "", 320, 250)
+        # add high score variable
         
         draw_button("EXIT", 30, 300, 140, 140, (239, 201, 239))
         draw_button("RESTART", 460, 300, 140, 140, (239, 201, 239))
