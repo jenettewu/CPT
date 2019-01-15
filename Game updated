@@ -117,7 +117,7 @@ def play():
 #leaderboard() and pause() must be defined like below
 number_of_games = 1
 word_height = 140
-game_scores = [10, 15, 9]
+game_scores = []
 rank = 0
 def leaderboard():
     global number_of_games, word_height, score
