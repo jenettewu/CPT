@@ -1,5 +1,8 @@
 def setup():
     size(640, 480)
+    global setting
+    setting = loadImage("fish bg.jpg")
+
 instruction_pass = False
 playing_pass = False
 leaderboard_pass = False
@@ -11,15 +14,17 @@ def draw():
     menu()
     
 def menu():
-    background("#6EC5E9")
-    draw_button("PLAY", 170, 180, 300, 80, (239, 201, 239))
+    global setting
+    image(setting,0,0)
+    draw_button("PLAY", 170, 185, 300, 80, (239, 201, 239))
     fill(255)
-    triangle(400, 200, 400, 240, 440, 220)
-    draw_button("LEADERBOARD", 170, 280, 300, 80, (239, 201, 239))
-    draw_button("INSTRUCTIONS", 170, 380, 300, 80, (239, 201, 239))
+    triangle(410, 210, 410, 250, 450, 230)
+    draw_button("LEADERBOARD", 60, 280, 250, 80, (239, 201, 239))
+    draw_button("INSTRUCTIONS", 330, 280, 250, 80, (239, 201, 239))
     instruction()
     leaderboard()
     play()
+    
 
 def draw_button(button_text, button_x, button_y, button_width, button_height, (r, g, b)):
     global playing_pass, leaderboard_pass, instruction_pass
@@ -38,7 +43,6 @@ def draw_button(button_text, button_x, button_y, button_width, button_height, (r
                 reset()
             elif button_text == "BACK":
                 leaderboard_pass = False
-                instruction_pass = False
             elif button_text == "INSTRUCTIONS":
                 instruction_pass = True
             elif button_text == "EXIT":
@@ -109,18 +113,12 @@ def pause():
     text("PAUSED", 320, 240)
 
 def play():
-    global player_fish_x, player_fish_y, fish_movement
+    global player_fish_x, player_fish_y, fish_movement , setting
     if playing_pass == True:
-        background(110, 197, 233)
-        fill(245, 225, 125)
-        rect(0, 400, 648, 80)    
-        fill(110, 197, 233, 100)
-        rect(0, 0, 640, 480)
+        image(setting,0,0)
         other_fish()
         fish_movement()
         death_screen()
-        
-#leaderboard() and pause() must be defined like below
 
 def instruction():
     if instruction_pass == True:
@@ -137,10 +135,10 @@ def instruction():
         text(" Your goal is to eat as much as you can", 320, 180)
         text("without being eaten.",320,220)
         text(" good luck ^^",320,260)
-
+        
 number_of_games = 1
 word_height = 140
-game_scores = []
+game_scores = [10, 15, 9]
 rank = 0
 def leaderboard():
     global number_of_games, word_height, score
@@ -167,7 +165,7 @@ o_fish_xco = []
 o_fish_length = []
 o_fish_width = []
 speed = []
-o_fish_colour = []
+o_fish_colour=[]
 
 def generation():
     for fish_num in range(8):
@@ -175,8 +173,8 @@ def generation():
         o_fish_xco.append(int(random(2)))
         o_fish_width.append(random(5, 100))
         o_fish_length.append(o_fish_width[fish_num] + o_fish_width[fish_num]/2)
-        o_fish_colour.append(color(random(255), random(255), random(255)))
-        
+        o_fish_colour.append(color(random(255),random(255), random(255)))
+    
         if o_fish_xco[fish_num] == 0:
             o_fish_xco[fish_num] = int(random(-400, -40))
             speed.append(random(1, 2))
@@ -189,12 +187,12 @@ points = 0
 update_points = 0
 score = 0
 
+
 def other_fish():
     #background("#6EC5E9")
     global fish_pos, speed, o_fish_length, o_fish_width, player_fish_width, player_fish_length, death
     global points, update_points, score
     noStroke()
-    
     for fish_num in range(8):
         noStroke()
         fill(o_fish_colour[fish_num])
@@ -229,24 +227,26 @@ def other_fish():
             else:
                 o_fish_xco[fish_num] = int(random(700, 800))
                 speed[fish_num] = (-(random(1, 2)))
-
+        
+        #Increase score
         if player_fish_width > o_fish_width[fish_num] + 5:
            if speed[fish_num] > 0:
                if player_fish_x - player_fish_length/2 in range(int(o_fish_xco[fish_num] - o_fish_length[fish_num]/2), int(o_fish_xco[fish_num] + o_fish_length[fish_num]/3)) and o_fish_yco[fish_num] in range(int(player_fish_y - player_fish_width/2), int(player_fish_y + player_fish_width/2 )):
-                   points += 1
-                   o_fish_xco[fish_num] = 800
+                   points +=1
+                   
            if speed[fish_num] < 0:
                if player_fish_x + player_fish_length/2 in range(int(o_fish_xco[fish_num] - o_fish_length[fish_num]/3), int(o_fish_xco[fish_num] + o_fish_length[fish_num]/2)) and o_fish_yco[fish_num] in range(int(player_fish_y - player_fish_width/2), int(player_fish_y + player_fish_width/2 )):
                    points += 1
-                   o_fish_xco[fish_num] = -200
+                   #o_fish_xco[fish_num] = -200
     
-    
+        #death
         if player_fish_width < o_fish_width[fish_num]:
             if speed[fish_num] > 0:
-                if player_fish_x - player_fish_length/2 in range(int(o_fish_xco[fish_num]), int(o_fish_xco[fish_num] + o_fish_length[fish_num]/3)) and (player_fish_y + player_fish_width/2 in range(int(o_fish_yco[fish_num] - o_fish_width[fish_num]), int(o_fish_yco[fish_num] + o_fish_width[fish_num])) and player_fish_y - player_fish_width/2 in range(int(o_fish_yco[fish_num] - o_fish_width[fish_num]), int(o_fish_yco[fish_num] + o_fish_width[fish_num]))) :
+                if player_fish_x - player_fish_length/2 in range(int(o_fish_xco[fish_num]), int(o_fish_xco[fish_num] + o_fish_length[fish_num]/3)) and player_fish_y in range(int(o_fish_yco[fish_num] - o_fish_width[fish_num]/2), int(o_fish_yco[fish_num] + o_fish_width[fish_num]/2)):
+            #(player_fish_y + player_fish_width/2 in range(int(o_fish_yco[fish_num] - o_fish_width[fish_num]), int(o_fish_yco[fish_num] + o_fish_width[fish_num])) and player_fish_y - player_fish_width/2 in range(int(o_fish_yco[fish_num] - o_fish_width[fish_num]), int(o_fish_yco[fish_num] + o_fish_width[fish_num]))) :
                     death =True
             if speed[fish_num] < 0:
-                if player_fish_x + player_fish_length/2 in range(int(o_fish_xco[fish_num] - o_fish_length[fish_num]/3), int(o_fish_xco[fish_num])) and (player_fish_y + player_fish_width/2 in range(int(o_fish_yco[fish_num] - o_fish_width[fish_num]), int(o_fish_yco[fish_num] + o_fish_width[fish_num])) and player_fish_y - player_fish_width/2 in range(int(o_fish_yco[fish_num] - o_fish_width[fish_num]), int(o_fish_yco[fish_num] + o_fish_width[fish_num]))) :
+                if player_fish_x + player_fish_length/2 in range(int(o_fish_xco[fish_num] - o_fish_length[fish_num]/3), int(o_fish_xco[fish_num])) and player_fish_y in range(int(o_fish_yco[fish_num] - o_fish_width[fish_num]/2), int(o_fish_yco[fish_num] + o_fish_width[fish_num]/2)):#(player_fish_y + player_fish_width/2 in range(int(o_fish_yco[fish_num] - o_fish_width[fish_num]), int(o_fish_yco[fish_num] + o_fish_width[fish_num])) and player_fish_y - player_fish_width/2 in range(int(o_fish_yco[fish_num] - o_fish_width[fish_num]), int(o_fish_yco[fish_num] + o_fish_width[fish_num]))) :
                     death = True
         
         if points != update_points:
@@ -270,8 +270,6 @@ def death_screen():
         text("YOU DIED!", 320, 100)
         textSize(30)
         text("YOUR SCORE: " + str(score), 320, 200)
-        text("HIGH SCORE: " + "", 320, 250)
-        # add high score variable
         
         draw_button("EXIT", 30, 300, 140, 140, (239, 201, 239))
         draw_button("RESTART", 460, 300, 140, 140, (239, 201, 239))
