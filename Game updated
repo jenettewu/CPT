@@ -79,14 +79,25 @@ def fish_movement():
     player_fish_y = mouseY
     
 def keyPressed():
-    if key == ' ':
-        global looping
-        if looping == True:
-            looping = False
-            noLoop()
-        elif looping == False:
-            looping = True
-            loop()
+    if playing_pass == True and death == False:
+        if key == ' ':
+            global looping
+            if looping == True:
+                looping = False
+                noLoop()
+                pause()
+            elif looping == False:
+                looping = True
+                loop()
+                
+def pause():
+    fill(239, 201, 239)
+    noStroke()
+    rect(100, 100, 440, 280)
+    fill(255)
+    textSize(30)
+    textAlign(CENTER, CENTER)
+    text("PAUSED", 320, 240)
 
 def play():
     global player_fish_x, player_fish_y, fish_movement
@@ -108,12 +119,12 @@ rank = 0
 def leaderboard():
     global number_of_games, word_height, score
     if leaderboard_pass == True:
-        background(0, 255, 255)
+        background("#6EC5E9")
         rect(120, 40, 400, 400)
         textSize(32)
         fill(0, 102, 153)
         text("LEADERBOARD", 315, 70)
-        draw_button("BACK", 525, 350, 100, 70, (255, 0, 0))
+        draw_button("BACK", 525, 350, 110, 70, (239, 201, 239))
         textSize(24)
         fill(0, 102, 153)
         text("Game " + str(number_of_games)+ "            score " + str(game_scores[rank]), 280, word_height)
