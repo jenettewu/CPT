@@ -124,12 +124,12 @@ def play():
 
 def instruction():
     if instruction_pass == True:
-        background(0, 255, 255)
+        background("#6EC5E9")
         rect(120,40,400,400)
         textSize(32)
         fill(0, 102, 153)
         text("INSTRUCTIONS", 315, 70)
-        draw_button("BACK", 525, 350, 100, 70, (255, 0, 0))
+        draw_button("BACK", 525, 350, 110, 70, (239, 201, 239))
         textSize(24)
         fill(0, 102, 153)
         textSize(20)
