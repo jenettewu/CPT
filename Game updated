@@ -27,9 +27,11 @@ def draw_button(button_text, button_x, button_y, button_width, button_height, (r
         fill(r - 50, g - 50, b - 50)
         if mousePressed:
             while playing_pass == False:
-                if button_text == "PLAY" or button_text == "RESTART":
+                if button_text == "PLAY":
                     reset()
-            if button_text == "LEADERBOARD":
+            if button_text == "RESTART":
+                reset()
+            elif button_text == "LEADERBOARD":
                     leaderboard_pass = True 
             elif button_text == "BACK":
                 leaderboard_pass = False
