@@ -137,9 +137,10 @@ def instruction():
         fill(0, 102, 153)
         textSize(20)
         text("Control the fish with your mouse.", 320, 140)
-        text(" Your goal is to eat as much as you can", 320, 180)
-        text("without being eaten.", 320, 220)
-        text(" good luck ^^", 320, 260)
+        text("Press the spacebar to pause.", 320, 180)
+        text(" Your goal is to eat as much as you can", 320, 220)
+        text("without being eaten.", 320, 260)
+        text(" good luck ^^", 320, 300)
         
 total_games = []
 word_height = 140
@@ -192,7 +193,6 @@ fish_pos = []
 points = 0
 update_points = 0
 score = 0
-
 
 def other_fish():
     #background("#6EC5E9")
@@ -262,7 +262,6 @@ def other_fish():
       
             update_points = points
         show_score()
-                
  
 def death_screen():
     global score
