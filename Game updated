@@ -1,7 +1,8 @@
 def setup():
     size(640, 480)
-    global setting
+    global setting, death_background
     setting = loadImage("fish bg.jpg")
+    death_background = loadImage("fish bg you died.jpg")
 
 instruction_pass = False
 playing_pass = False
@@ -267,8 +268,8 @@ def other_fish():
         show_score()
  
 def death_screen():
-    global score
-    background("#6EC5E9")
+    global score, death_background
+    image(death_background,0,0)
     textSize(60)
     fill(0)
     textAlign(CENTER, CENTER)
