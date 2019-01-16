@@ -15,7 +15,7 @@ def draw():
     
 def menu():
     global setting
-    image(setting,0,0)
+    image(setting, 0, 0)
     draw_button("PLAY", 170, 185, 300, 80, (239, 201, 239))
     fill(255)
     triangle(410, 210, 410, 250, 450, 230)
@@ -24,28 +24,30 @@ def menu():
     instruction()
     leaderboard()
     play()
-    
 
 def draw_button(button_text, button_x, button_y, button_width, button_height, (r, g, b)):
-    global playing_pass, leaderboard_pass, instruction_pass
+    global playing_pass, leaderboard_pass, instruction_pass, game_scores, score, total_games, game_num, death
     noStroke()
     
     rect(button_x, button_y, button_width, button_height)
     if mouseX in range(button_x, button_x + button_width) and mouseY in range(button_y, button_y + button_height):
         fill(r - 50, g - 50, b - 50)
         if mousePressed:
-            if playing_pass == False:
+            if playing_pass == False and death == False:
                 if button_text == "PLAY":
                     reset()
                 elif button_text == "LEADERBOARD":
                     leaderboard_pass = True
             if button_text == "RESTART":
                 reset()
+                add_score()
             elif button_text == "BACK":
                 leaderboard_pass = False
+                instruction_pass = False
             elif button_text == "INSTRUCTIONS":
                 instruction_pass = True
             elif button_text == "EXIT":
+                add_score()
                 death = False
                 menu_screen = True
                 playing_pass = False
@@ -113,17 +115,20 @@ def pause():
     text("PAUSED", 320, 240)
 
 def play():
-    global player_fish_x, player_fish_y, fish_movement , setting
+    global player_fish_x, player_fish_y, setting, death, playing_pass
     if playing_pass == True:
-        image(setting,0,0)
+        image(setting, 0, 0)
         other_fish()
         fish_movement()
+    if death == True:
+        playing_pass = False
         death_screen()
 
 def instruction():
+    global instruction_pass
     if instruction_pass == True:
         background("#6EC5E9")
-        rect(120,40,400,400)
+        rect(120, 40, 400, 400)
         textSize(32)
         fill(0, 102, 153)
         text("INSTRUCTIONS", 315, 70)
@@ -131,34 +136,35 @@ def instruction():
         textSize(24)
         fill(0, 102, 153)
         textSize(20)
-        text("Control the fish with your mouse.",320,140)
+        text("Control the fish with your mouse.", 320, 140)
         text(" Your goal is to eat as much as you can", 320, 180)
-        text("without being eaten.",320,220)
-        text(" good luck ^^",320,260)
+        text("without being eaten.", 320, 220)
+        text(" good luck ^^", 320, 260)
         
-number_of_games = 1
+total_games = []
 word_height = 140
-game_scores = [10, 15, 9]
-rank = 0
+game_scores = []
+game_num = 0
+
+def add_score():
+    global game_scores, score, total_games, game_num
+    game_scores.append(score)
+    game_num += 1
+    total_games.append(game_num)
+
 def leaderboard():
-    global number_of_games, word_height, score
+    global total_games, game_scores, word_height, score, game_num, leaderboard_pass
     if leaderboard_pass == True:
         background("#6EC5E9")
         rect(120, 40, 400, 400)
         textSize(32)
         fill(0, 102, 153)
         text("LEADERBOARD", 315, 70)
-        draw_button("BACK", 525, 350, 110, 70, (239, 201, 239))
         textSize(24)
-        fill(0, 102, 153)
-        text("Game " + str(number_of_games)+ "            score " + str(game_scores[rank]), 280, word_height)
-    elif death == True:
-        number_of_games + 1 
-        word_height + 20
-        rank + 1
-        game_scores.append(score)
-        for scores in game_scores:
-            game_scores.sort()
+        for i in range(len(total_games)):
+            text("Game " + str(total_games[i])+ "            Score " + str(game_scores[i]), 280, word_height)
+            
+        draw_button("BACK", 525, 350, 110, 70, (239, 201, 239))
         
 o_fish_yco = []
 o_fish_xco = []
@@ -173,7 +179,7 @@ def generation():
         o_fish_xco.append(int(random(2)))
         o_fish_width.append(random(5, 100))
         o_fish_length.append(o_fish_width[fish_num] + o_fish_width[fish_num]/2)
-        o_fish_colour.append(color(random(255),random(255), random(255)))
+        o_fish_colour.append(color(random(255), random(255), random(255)))
     
         if o_fish_xco[fish_num] == 0:
             o_fish_xco[fish_num] = int(random(-400, -40))
@@ -259,21 +265,18 @@ def other_fish():
                 
  
 def death_screen():
-    if death == True:
-        playing_pass = False
-        background("#6EC5E9")
-        global score
+    global score
+    background("#6EC5E9")
+    textSize(60)
+    fill(0)
+    textAlign(CENTER, CENTER)
+    text("YOU DIED!", 320, 100)
+    textSize(30)
+    text("YOUR SCORE: " + str(score), 320, 200)
     
-        textSize(60)
-        fill(0)
-        textAlign(CENTER, CENTER)
-        text("YOU DIED!", 320, 100)
-        textSize(30)
-        text("YOUR SCORE: " + str(score), 320, 200)
-        
-        draw_button("EXIT", 30, 300, 140, 140, (239, 201, 239))
-        draw_button("RESTART", 460, 300, 140, 140, (239, 201, 239))
-    
+    draw_button("EXIT", 30, 300, 140, 140, (239, 201, 239))
+    draw_button("RESTART", 460, 300, 140, 140, (239, 201, 239))
+
 def show_score():
     global score
     textSize(25)
