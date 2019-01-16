@@ -143,7 +143,6 @@ def instruction():
         text(" good luck ^^", 320, 300)
         
 total_games = []
-word_height = 140
 game_scores = []
 game_num = 0
 
@@ -153,6 +152,7 @@ def add_score():
     game_num += 1
     total_games.append(game_num)
 
+word_height = 25
 def leaderboard():
     global total_games, game_scores, word_height, score, game_num, leaderboard_pass
     if leaderboard_pass == True:
@@ -161,9 +161,12 @@ def leaderboard():
         textSize(32)
         fill(0, 102, 153)
         text("LEADERBOARD", 315, 70)
-        textSize(24)
+
         for i in range(len(total_games)):
-            text("Game " + str(total_games[i])+ "            Score " + str(game_scores[i]), 280, word_height)
+            textSize(24)
+            textAlign(TOP,CENTER)
+            text("Game " + str(total_games[i]), 180, 110 + word_height*i)
+            text("Score " + str(game_scores[i]), 320, 110+ word_height*i)
             
         draw_button("BACK", 525, 350, 110, 70, (239, 201, 239))
         
