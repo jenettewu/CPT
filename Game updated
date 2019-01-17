@@ -17,6 +17,10 @@ def draw():
 def menu():
     global setting
     image(setting, 0, 0)
+    fill(0)
+    textAlign(CENTER, CENTER)
+    textSize(80)
+    text("CHOMP!", 320, 100)
     draw_button("PLAY", 170, 185, 300, 80, (239, 201, 239))
     fill(255)
     triangle(410, 210, 410, 250, 450, 230)
@@ -221,7 +225,7 @@ def other_fish():
     for fish_num in range(10):
         noStroke()
         fill(o_fish_colour[fish_num])
-        if (speed[fish_num] < 0 and o_fish_xco[fish_num] < -100) or (speed[fish_num] > 0 and o_fish_xco[fish_num] > 700):
+        if (speed[fish_num] < 0 and o_fish_xco[fish_num] < -100) or (speed[fish_num] > 0 and o_fish_xco[fish_num] > 740):
             o_fish_yco[fish_num] = (int(random(50, 430)))
             o_fish_xco[fish_num] = (int(random(2)))
             o_fish_colour[fish_num ] = (color(random(255), random(255), random(255)))
