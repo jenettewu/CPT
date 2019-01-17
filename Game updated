@@ -88,17 +88,23 @@ def reset():
     play()
 
 old_mouseX = 320
+side_change = 1
 def fish_movement():
-    global player_fish_x, player_fish_y, player_fish_length, player_fish_width, old_mouseX
+    global player_fish_x, player_fish_y, player_fish_length, player_fish_width, old_mouseX, side_change
     fill(0)
     ellipse(player_fish_x, player_fish_y, player_fish_length, player_fish_width)
     player_fish_x = mouseX
     player_fish_y = mouseY
     if old_mouseX > mouseX:
         triangle(player_fish_x + player_fish_length/3, player_fish_y, player_fish_x + player_fish_length/2 + player_fish_length/4, player_fish_y - player_fish_width/3, player_fish_x + player_fish_length/2 + player_fish_length/4, player_fish_y + player_fish_width/3)
+        side_change = 0
     elif old_mouseX < mouseX:
         triangle(player_fish_x - player_fish_length/3, player_fish_y, player_fish_x - player_fish_length/2 - player_fish_length/4, player_fish_y + player_fish_width/3, player_fish_x - player_fish_length/2 - player_fish_length/4, player_fish_y - player_fish_width/3)
-
+        side_change = 1
+    if side_change == 1:
+        triangle(player_fish_x - player_fish_length/3, player_fish_y, player_fish_x - player_fish_length/2 - player_fish_length/4, player_fish_y + player_fish_width/3, player_fish_x - player_fish_length/2 - player_fish_length/4, player_fish_y - player_fish_width/3)
+    else:
+        triangle(player_fish_x + player_fish_length/3, player_fish_y, player_fish_x + player_fish_length/2 + player_fish_length/4, player_fish_y - player_fish_width/3, player_fish_x + player_fish_length/2 + player_fish_length/4, player_fish_y + player_fish_width/3)
     old_mouseX = player_fish_x
     
 def keyPressed():
