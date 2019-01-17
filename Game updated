@@ -68,7 +68,7 @@ def draw_button(button_text, button_x, button_y, button_width, button_height, (r
     
 player_fish_x = 0
 player_fish_y = 0
-player_fish_length = 50
+player_fish_length = 75
 player_fish_width = 50
 
 def reset():
@@ -83,16 +83,23 @@ def reset():
     o_fish_width = []
     speed = []
     player_fish_width = 50
-    player_fish_length = 50
+    player_fish_length = 75
     generation()
     play()
 
+old_mouseX = 320
 def fish_movement():
-    global player_fish_x, player_fish_y, player_fish_length, player_fish_width
+    global player_fish_x, player_fish_y, player_fish_length, player_fish_width, old_mouseX
     fill(0)
     ellipse(player_fish_x, player_fish_y, player_fish_length, player_fish_width)
     player_fish_x = mouseX
     player_fish_y = mouseY
+    if old_mouseX > mouseX:
+        triangle(player_fish_x + player_fish_length/3, player_fish_y, player_fish_x + player_fish_length/2 + player_fish_length/4, player_fish_y - player_fish_width/3, player_fish_x + player_fish_length/2 + player_fish_length/4, player_fish_y + player_fish_width/3)
+    elif old_mouseX < mouseX:
+        triangle(player_fish_x - player_fish_length/3, player_fish_y, player_fish_x - player_fish_length/2 - player_fish_length/4, player_fish_y + player_fish_width/3, player_fish_x - player_fish_length/2 - player_fish_length/4, player_fish_y - player_fish_width/3)
+
+    old_mouseX = player_fish_x
     
 def keyPressed():
     if playing_pass == True and death == False:
