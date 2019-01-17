@@ -27,7 +27,7 @@ def menu():
     play()
 
 def draw_button(button_text, button_x, button_y, button_width, button_height, (r, g, b)):
-    global playing_pass, leaderboard_pass, instruction_pass, game_scores, score, total_games, game_num, death
+    global playing_pass, leaderboard_pass, instruction_pass, menu_screen, death
     noStroke()
     
     rect(button_x, button_y, button_width, button_height)
@@ -161,13 +161,13 @@ def leaderboard():
         fill(0, 102, 153)
         text("LEADERBOARD", 315, 70)
 
-        for i in range(game_num-1):
+        for i in range(game_num - 1):
             textSize(24)
-            textAlign(TOP,CENTER)
+            textAlign(TOP, CENTER)
             game_scores.sort()
             game_scores.reverse()
-            text("Game " + str(game_scores[i][1]), 180, 110 + word_height*i)
-            text("Score " + str(game_scores[i][0]), 320, 110 + word_height*i)
+            text("Game " + str(game_scores[i][1]), 180, 110 + word_height * i)
+            text("Score " + str(game_scores[i][0]), 320, 110 + word_height * i)
             
         draw_button("BACK", 525, 350, 110, 70, (239, 201, 239))
         
@@ -255,13 +255,13 @@ def other_fish():
             if speed[fish_num] > 0:
                 if player_fish_x - player_fish_length/2 in range(int(o_fish_xco[fish_num]), int(o_fish_xco[fish_num] + o_fish_length[fish_num]/3)) and player_fish_y in range(int(o_fish_yco[fish_num] - o_fish_width[fish_num]/2), int(o_fish_yco[fish_num] + o_fish_width[fish_num]/2)):
             #(player_fish_y + player_fish_width/2 in range(int(o_fish_yco[fish_num] - o_fish_width[fish_num]), int(o_fish_yco[fish_num] + o_fish_width[fish_num])) and player_fish_y - player_fish_width/2 in range(int(o_fish_yco[fish_num] - o_fish_width[fish_num]), int(o_fish_yco[fish_num] + o_fish_width[fish_num]))) :
-                    death =True
+                    death = True
             if speed[fish_num] < 0:
                 if player_fish_x + player_fish_length/2 in range(int(o_fish_xco[fish_num] - o_fish_length[fish_num]/3), int(o_fish_xco[fish_num])) and player_fish_y in range(int(o_fish_yco[fish_num] - o_fish_width[fish_num]/2), int(o_fish_yco[fish_num] + o_fish_width[fish_num]/2)):#(player_fish_y + player_fish_width/2 in range(int(o_fish_yco[fish_num] - o_fish_width[fish_num]), int(o_fish_yco[fish_num] + o_fish_width[fish_num])) and player_fish_y - player_fish_width/2 in range(int(o_fish_yco[fish_num] - o_fish_width[fish_num]), int(o_fish_yco[fish_num] + o_fish_width[fish_num]))) :
                     death = True
         
         if points != update_points:
-            score+= int(o_fish_width[fish_num] + o_fish_length[fish_num])/10
+            score += int(o_fish_width[fish_num] + o_fish_length[fish_num])/10
             # player_fish_length += (o_fish_length[fish_num] + o_fish_width[fish_num])/10
             # player_fish_width += (o_fish_length[fish_num] + o_fish_width[fish_num])/10
             update_points = points
@@ -269,7 +269,7 @@ def other_fish():
  
 def death_screen():
     global score, death_background
-    image(death_background,0,0)
+    image(death_background, 0, 0)
     textSize(60)
     fill(0)
     textAlign(CENTER, CENTER)
