@@ -170,7 +170,7 @@ def add_score():
     game_scores.append([score, game_num])
     game_num += 1
 
-word_height = 35
+word_height = 30
 
 def leaderboard():
     global game_scores, word_height, score, game_num, leaderboard_pass
@@ -186,8 +186,8 @@ def leaderboard():
             textAlign(TOP, CENTER)
             game_scores.sort()
             game_scores.reverse()
-            text("Game " + str(game_scores[i][1]), 180, 110 + word_height * i)
-            text("Score " + str(game_scores[i][0]), 320, 110 + word_height * i)
+            text("Game " + str(game_scores[i][1]), 180, 130 + word_height * i)
+            text("Score " + str(game_scores[i][0]), 320, 130 + word_height * i)
             
         draw_button("BACK", 525, 350, 110, 70, (239, 201, 239))
         
