@@ -270,7 +270,7 @@ def other_fish():
         show_score()
  
 def death_screen():
-    global score, death_background
+    global score, death_background, game_scores, score
     image(death_background, 0, 0)
     textSize(60)
     fill(0)
@@ -278,6 +278,11 @@ def death_screen():
     text("YOU DIED!", 320, 100)
     textSize(30)
     text("YOUR SCORE: " + str(score), 320, 200)
+    if len(game_scores) < 1 or score >= max(game_scores):
+        highscore = score
+    else:
+        highscore = max(game_scores)
+    text("HIGH SCORE: " + str(highscore), 320, 250)
     
     draw_button("EXIT", 30, 300, 140, 140, (239, 201, 239))
     draw_button("RESTART", 460, 300, 140, 140, (239, 201, 239))
