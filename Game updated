@@ -143,19 +143,17 @@ def instruction():
         text("as you can without being eaten.", 320, 260)
         text(" good luck ^^", 320, 300)
         
-total_games = []
 game_scores = []
-game_num = 0
+game_num = 1
 
 def add_score():
-    global game_scores, score, total_games, game_num
-    game_scores.append(score)
+    global game_scores, score, game_num
+    game_scores.append([score, game_num])
     game_num += 1
-    total_games.append(game_num)
 
 word_height = 25
 def leaderboard():
-    global total_games, game_scores, word_height, score, game_num, leaderboard_pass
+    global game_scores, word_height, score, game_num, leaderboard_pass
     if leaderboard_pass == True:
         background("#6EC5E9")
         rect(120, 40, 400, 400)
@@ -163,11 +161,13 @@ def leaderboard():
         fill(0, 102, 153)
         text("LEADERBOARD", 315, 70)
 
-        for i in range(len(total_games)):
+        for i in range(game_num-1):
             textSize(24)
             textAlign(TOP,CENTER)
-            text("Game " + str(total_games[i]), 180, 110 + word_height*i)
-            text("Score " + str(game_scores[i]), 320, 110+ word_height*i)
+            game_scores.sort()
+            game_scores.reverse()
+            text("Game " + str(game_scores[i][1]), 180, 110 + word_height*i)
+            text("Score " + str(game_scores[i][0]), 320, 110 + word_height*i)
             
         draw_button("BACK", 525, 350, 110, 70, (239, 201, 239))
         
