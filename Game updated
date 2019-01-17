@@ -278,10 +278,10 @@ def death_screen():
     text("YOU DIED!", 320, 100)
     textSize(30)
     text("YOUR SCORE: " + str(score), 320, 200)
-    if len(game_scores) < 1 or score >= max(game_scores):
+    if len(game_scores) < 1 or score >= max(game_scores[0]):
         highscore = score
     else:
-        highscore = max(game_scores)
+        highscore = max(game_scores[0])
     text("HIGH SCORE: " + str(highscore), 320, 250)
     
     draw_button("EXIT", 30, 300, 140, 140, (239, 201, 239))
