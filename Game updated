@@ -153,7 +153,8 @@ def add_score():
     game_scores.append([score, game_num])
     game_num += 1
 
-word_height = 25
+word_height = 35
+
 def leaderboard():
     global game_scores, word_height, score, game_num, leaderboard_pass
     if leaderboard_pass == True:
