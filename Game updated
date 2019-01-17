@@ -114,6 +114,8 @@ def pause():
     textSize(30)
     textAlign(CENTER, CENTER)
     text("PAUSED", 320, 240)
+    textSize(20)
+    text("Press the spacebar to resume", 320, 350)
 
 def play():
     global player_fish_x, player_fish_y, setting, death, playing_pass
