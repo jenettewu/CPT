@@ -40,8 +40,8 @@ def draw_button(button_text, button_x, button_y, button_width, button_height, (r
                 elif button_text == "LEADERBOARD":
                     leaderboard_pass = True
             if button_text == "RESTART":
-                reset()
                 add_score()
+                reset()
             elif button_text == "BACK":
                 leaderboard_pass = False
                 instruction_pass = False
