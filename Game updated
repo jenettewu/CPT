@@ -282,8 +282,6 @@ def other_fish():
         
         if points != update_points:
             score += int(o_fish_width[fish_num] + o_fish_length[fish_num])/10
-            # player_fish_length += (o_fish_length[fish_num] + o_fish_width[fish_num])/10
-            # player_fish_width += (o_fish_length[fish_num] + o_fish_width[fish_num])/10
             update_points = points
         show_score()
  
