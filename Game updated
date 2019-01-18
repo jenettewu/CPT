@@ -302,8 +302,8 @@ def death_screen():
         highscore = max(game_scores[0])
     text("HIGH SCORE: " + str(highscore), 320, 250)
     
-    draw_button("EXIT", 30, 300, 140, 140, (239, 201, 239))
-    draw_button("RESTART", 460, 300, 140, 140, (239, 201, 239))
+    draw_button("EXIT", 20, 365, 250, 80, (239, 201, 239))
+    draw_button("RESTART", 370, 365, 250, 80, (239, 201, 239))
 
 def show_score():
     global score
