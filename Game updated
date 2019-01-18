@@ -162,7 +162,7 @@ def instruction():
         text("Press the spacebar to pause.", 320, 180)
         text(" Your goal is to eat as many fish", 320, 220)
         text("as you can without being eaten.", 320, 260)
-        text(" good luck ^^", 320, 300)
+        text(" Good Luck ^^", 320, 300)
         
 game_scores = []
 game_num = 1
@@ -171,6 +171,10 @@ def add_score():
     global game_scores, score, game_num
     game_scores.append([score, game_num])
     game_num += 1
+    game_scores.sort()
+    game_scores.reverse()
+    if len(game_scores) > 10:
+        game_scores.pop()
 
 word_height = 30
 
@@ -183,11 +187,9 @@ def leaderboard():
         fill(0, 102, 153)
         text("LEADERBOARD", 315, 70)
 
-        for i in range(game_num - 1):
+        for i in range(len(game_scores)):
             textSize(24)
             textAlign(TOP, CENTER)
-            game_scores.sort()
-            game_scores.reverse()
             text("Game " + str(game_scores[i][1]), 180, 130 + word_height * i)
             text("Score " + str(game_scores[i][0]), 320, 130 + word_height * i)
             
