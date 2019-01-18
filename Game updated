@@ -13,7 +13,8 @@ looping = True
 
 def draw():
     menu()
-    
+    print(frameRate)
+
 def menu():
     global setting
     image(setting, 0, 0)
@@ -35,10 +36,11 @@ def draw_button(button_text, button_x, button_y, button_width, button_height, (r
     noStroke()
     
     rect(button_x, button_y, button_width, button_height)
+    
     if mouseX in range(button_x, button_x + button_width) and mouseY in range(button_y, button_y + button_height):
         fill(r - 50, g - 50, b - 50)
         if mousePressed:
-            if playing_pass == False and death == False and instruction_pass == False and leaderboard_pass == False:
+            if playing_pass is False and death is False and instruction_pass is False and leaderboard_pass is False:
                 if button_text == "PLAY":
                     reset()
                 elif button_text == "LEADERBOARD":
@@ -93,6 +95,7 @@ def reset():
 
 old_mouseX = 320
 side_change = 1
+
 def fish_movement():
     global player_fish_x, player_fish_y, player_fish_length, player_fish_width, old_mouseX, side_change
     fill(0)
@@ -112,14 +115,14 @@ def fish_movement():
     old_mouseX = player_fish_x
     
 def keyPressed():
-    if playing_pass == True and death == False:
+    if playing_pass is True and death is False:
         if key == ' ':
             global looping
-            if looping == True:
+            if looping is True:
                 looping = False
                 noLoop()
                 pause()
-            elif looping == False:
+            elif looping is False:
                 looping = True
                 loop()
                 
@@ -136,17 +139,17 @@ def pause():
 
 def play():
     global player_fish_x, player_fish_y, setting, death, playing_pass
-    if playing_pass == True:
+    if playing_pass is True:
         image(setting, 0, 0)
         other_fish()
         fish_movement()
-    if death == True:
+    if death is True:
         playing_pass = False
         death_screen()
 
 def instruction():
     global instruction_pass
-    if instruction_pass == True:
+    if instruction_pass is True:
         background("#6EC5E9")
         rect(120, 40, 400, 400)
         textSize(32)
@@ -174,7 +177,7 @@ word_height = 30
 
 def leaderboard():
     global game_scores, word_height, score, game_num, leaderboard_pass
-    if leaderboard_pass == True:
+    if leaderboard_pass is True:
         background("#6EC5E9")
         rect(120, 40, 400, 400)
         textSize(32)
@@ -196,7 +199,7 @@ o_fish_xco = []
 o_fish_length = []
 o_fish_width = []
 speed = []
-o_fish_colour=[]
+o_fish_colour = []
 
 def generation():
     for fish_num in range(10):
@@ -218,7 +221,6 @@ update_points = 0
 score = 0
 
 def other_fish():
-    #background("#6EC5E9")
     global speed, o_fish_length, o_fish_width, player_fish_width, player_fish_length, death
     global points, update_points, score
     noStroke()
@@ -228,10 +230,10 @@ def other_fish():
         if (speed[fish_num] < 0 and o_fish_xco[fish_num] < -100) or (speed[fish_num] > 0 and o_fish_xco[fish_num] > 740):
             o_fish_yco[fish_num] = (int(random(50, 430)))
             o_fish_xco[fish_num] = (int(random(2)))
-            o_fish_colour[fish_num ] = (color(random(255), random(255), random(255)))
+            o_fish_colour[fish_num] = (color(random(255), random(255), random(255)))
             if o_fish_xco[fish_num] == 0:
                 o_fish_xco[fish_num] = int(random(-400, -40))
-                speed[fish_num] = (random(1,2))
+                speed[fish_num] = (random(1, 2))
             else:
                 o_fish_xco[fish_num] = int(random(940, 680))
                 speed[fish_num] = (-(random(1, 2)))
@@ -257,16 +259,16 @@ def other_fish():
         
         o_fish_xco[fish_num] += speed[fish_num]
 
-        #Increase score
+        # Increase score
         if player_fish_width > o_fish_width[fish_num] + 5:
-           if speed[fish_num] > 0:
+            if speed[fish_num] > 0:
                if player_fish_x - player_fish_length/2 in range(int(o_fish_xco[fish_num] - o_fish_length[fish_num]/2), int(o_fish_xco[fish_num] + o_fish_length[fish_num]/3)) and o_fish_yco[fish_num] in range(int(player_fish_y - player_fish_width/2), int(player_fish_y + player_fish_width/2 )):
-                   points +=1
+                   points += 1
                    o_fish_xco[fish_num] = 800
                    
-           if speed[fish_num] < 0:
+           elif speed[fish_num] < 0:
                if player_fish_x + player_fish_length/2 in range(int(o_fish_xco[fish_num] - o_fish_length[fish_num]/3), int(o_fish_xco[fish_num] + o_fish_length[fish_num]/2)) and o_fish_yco[fish_num] in range(int(player_fish_y - player_fish_width/2), int(player_fish_y + player_fish_width/2 )):
-                   points += 1
+                  points += 1
                    o_fish_xco[fish_num] = -200
 
     
@@ -306,3 +308,4 @@ def show_score():
     global score
     textSize(25)
     text("Score: " + str(score), 80, 50)
+    
