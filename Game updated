@@ -208,10 +208,10 @@ def generation():
     
         if o_fish_xco[fish_num] == 0:
             o_fish_xco[fish_num] = int(random(-400, -40))
-            speed.append(random(1, 2))
+            speed.append(random(1.5, 2.5))
         else:
             o_fish_xco[fish_num] = int(random(940, 680))
-            speed.append(-(random(1, 2)))
+            speed.append(-(random(1.5, 2.5)))
         
 points = 0
 update_points = 0
@@ -231,10 +231,10 @@ def other_fish():
             o_fish_colour[fish_num ] = (color(random(255), random(255), random(255)))
             if o_fish_xco[fish_num] == 0:
                 o_fish_xco[fish_num] = int(random(-400, -40))
-                speed[fish_num] = (random(1,2))
+                speed[fish_num] = (random(1.5,2.5))
             else:
                 o_fish_xco[fish_num] = int(random(940, 680))
-                speed[fish_num] = (-(random(1, 2)))
+                speed[fish_num] = (-(random(1.5, 2.5)))
         
         if speed[fish_num] < 0:
             ellipse(o_fish_xco[fish_num], o_fish_yco[fish_num], o_fish_length[fish_num], o_fish_width[fish_num])
