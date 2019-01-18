@@ -13,7 +13,6 @@ looping = True
 
 def draw():
     menu()
-    print(frameRate)
 
 def menu():
     global setting
@@ -266,10 +265,10 @@ def other_fish():
                    points += 1
                    o_fish_xco[fish_num] = 800
                    
-           elif speed[fish_num] < 0:
-               if player_fish_x + player_fish_length/2 in range(int(o_fish_xco[fish_num] - o_fish_length[fish_num]/3), int(o_fish_xco[fish_num] + o_fish_length[fish_num]/2)) and o_fish_yco[fish_num] in range(int(player_fish_y - player_fish_width/2), int(player_fish_y + player_fish_width/2 )):
-                  points += 1
-                   o_fish_xco[fish_num] = -200
+            if speed[fish_num] < 0:
+                if player_fish_x + player_fish_length/2 in range(int(o_fish_xco[fish_num] - o_fish_length[fish_num]/3), int(o_fish_xco[fish_num] + o_fish_length[fish_num]/2)) and o_fish_yco[fish_num] in range(int(player_fish_y - player_fish_width/2), int(player_fish_y + player_fish_width/2 )):
+                    points += 1
+                    o_fish_xco[fish_num] = -200
 
     
         #death
