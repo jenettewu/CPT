@@ -286,7 +286,7 @@ def other_fish():
                         death = True
         elif player_fish_width < o_fish_width and speed[fish_num] < 0:
                 if player_fish_x + player_fish_length/2 in range(int(o_fish_xco[fish_num] - o_fish_length[fish_num]/3), int(o_fish_xco[fish_num])):
-                    if player_fish_y in range(int(o_fish_yco[fish_num] - o_fish_width[fish_num]/2), int(o_fish_yco[fish_num] + o_fish_width[fish_num]/2)):#(player_fish_y + player_fish_width/2 in range(int(o_fish_yco[fish_num] - o_fish_width[fish_num]), int(o_fish_yco[fish_num] + o_fish_width[fish_num])) and player_fish_y - player_fish_width/2 in range(int(o_fish_yco[fish_num] - o_fish_width[fish_num]), int(o_fish_yco[fish_num] + o_fish_width[fish_num]))) :
+                    if player_fish_y in range(int(o_fish_yco[fish_num] - o_fish_width[fish_num]/2), int(o_fish_yco[fish_num] + o_fish_width[fish_num]/2)):
                         death = True
         
         if points != update_points:
