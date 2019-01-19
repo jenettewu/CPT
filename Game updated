@@ -209,10 +209,10 @@ def generation():
         o_fish_length.append(o_fish_width[fish_num] + o_fish_width[fish_num]/2)
         o_fish_colour.append(color(random(255), random(255), random(255)))
     
-        if o_fish_xco[fish_num] == 0:
+        if o_fish_xco[fish_num] == 0: #fish starts on the left and travels right
             o_fish_xco[fish_num] = int(random(-400, -40))
             speed.append(random(1, 2))
-        else:
+        else: #fish starts on the right and travels left
             o_fish_xco[fish_num] = int(random(940, 680))
             speed.append(-(random(1, 2)))
         
