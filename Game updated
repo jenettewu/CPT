@@ -71,11 +71,7 @@ def draw_button(button_text, button_x, button_y, button_width, button_height, (r
     text(button_text, button_width/2, button_height/2)
     popMatrix()
     
-player_fish_x = 0
-player_fish_y = 0
-player_fish_length = 75
-player_fish_width = 50
-
+    
 def reset():
     global playing_pass, menu_screen, score, death, o_fish_yco, o_fish_xco, o_fish_length, o_fish_width
     death = False
@@ -90,6 +86,11 @@ def reset():
     generation()
     play()
 
+
+player_fish_x = 0
+player_fish_y = 0
+player_fish_length = 75
+player_fish_width = 50
 old_mouseX = 320
 side_change = 1
 
