@@ -100,10 +100,10 @@ def fish_movement():
     ellipse(player_fish_x, player_fish_y, player_fish_length, player_fish_width)
     player_fish_x = mouseX
     player_fish_y = mouseY
-    if old_mouseX > mouseX:
+    if old_mouseX > mouseX: #move right
         triangle(player_fish_x + player_fish_length/3, player_fish_y, player_fish_x + player_fish_length/2 + player_fish_length/4, player_fish_y - player_fish_width/3, player_fish_x + player_fish_length/2 + player_fish_length/4, player_fish_y + player_fish_width/3)
         side_change = 0
-    elif old_mouseX < mouseX:
+    elif old_mouseX < mouseX: #move left
         triangle(player_fish_x - player_fish_length/3, player_fish_y, player_fish_x - player_fish_length/2 - player_fish_length/4, player_fish_y + player_fish_width/3, player_fish_x - player_fish_length/2 - player_fish_length/4, player_fish_y - player_fish_width/3)
         side_change = 1
     if side_change == 1:
