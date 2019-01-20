@@ -392,7 +392,7 @@ def other_fish():
                      int(o_fish_xco[fish_num] + o_fish_length[fish_num]/2 +
                      o_fish_length[fish_num]/4)) and o_fish_yco[fish_num] \
                     in range(int(player_fish_y - player_fish_width/2),
-                     int(player_fish_y + player_fish_width/2)):
+                             int(player_fish_y + player_fish_width/2)):
                         points += 1
                         o_fish_xco[fish_num] = -200
 
