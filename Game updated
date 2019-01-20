@@ -4,12 +4,6 @@ def setup():
     setting = loadImage("fish bg.jpg")
     death_background = loadImage("fish bg you died.jpg")
 
-instruction_pass = False
-playing_pass = False
-leaderboard_pass = False
-menu_screen = True
-death = False
-
 
 def draw():
     menu()
@@ -30,6 +24,12 @@ def menu():
     instruction()
     leaderboard()
     play()
+
+instruction_pass = False
+playing_pass = False
+leaderboard_pass = False
+menu_screen = True
+death = False
 
 
 def draw_button(button_text, button_x, button_y,
@@ -134,6 +134,7 @@ def fish_movement():
                  player_fish_x + player_fish_length/2 + player_fish_length/4,
                  player_fish_y + player_fish_width/3)
     old_mouseX = player_fish_x
+
 
 continue_play = True
 
@@ -443,4 +444,3 @@ def show_score():
     global score
     textSize(25)
     text("Score: " + str(score), 80, 50)
-    
