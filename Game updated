@@ -9,7 +9,6 @@ playing_pass = False
 leaderboard_pass = False
 menu_screen = True
 death = False
-looping = True
 
 
 def draw():
@@ -136,17 +135,19 @@ def fish_movement():
                  player_fish_y + player_fish_width/3)
     old_mouseX = player_fish_x
 
+continue_play = True
+
 
 def keyPressed():
     if playing_pass is True and death is False:
         if key == ' ':
-            global looping
-            if looping is True:
-                looping = False
+            global continue_play
+            if continue_play is True:
+                continue_play = False
                 noLoop()
                 pause()
-            elif looping is False:
-                looping = True
+            elif continue_play is False:
+                continue_play = True
                 loop()
 
 
