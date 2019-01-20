@@ -30,14 +30,17 @@ def menu():
     leaderboard()
     play()
 
-def draw_button(button_text, button_x, button_y, button_width, button_height, (r, g, b)):
+def draw_button(button_text, button_x, button_y,
+                button_width, button_height, (r, g, b)):
     global playing_pass, leaderboard_pass, instruction_pass, menu_screen, death
     noStroke()
     
-    if mouseX in range(button_x, button_x + button_width) and mouseY in range(button_y, button_y + button_height):
+    if mouseX in range(button_x, button_x + button_width) \
+       and mouseY in range(button_y, button_y + button_height):
         fill(r - 50, g - 50, b - 50)
         if mousePressed:
-            if playing_pass is False and death is False and instruction_pass is False and leaderboard_pass is False:
+            if playing_pass is False and death is False and \
+               instruction_pass is False and leaderboard_pass is False:
                 if button_text == "PLAY":
                     reset()
                 elif button_text == "LEADERBOARD":
@@ -71,7 +74,8 @@ def draw_button(button_text, button_x, button_y, button_width, button_height, (r
     
     
 def reset():
-    global playing_pass, menu_screen, score, death, o_fish_yco, o_fish_xco, o_fish_length, o_fish_width
+    global playing_pass, menu_screen, score, death
+    global o_fish_yco, o_fish_xco, o_fish_length, o_fish_width
     death = False
     playing_pass = True
     menu_screen = False
@@ -93,21 +97,39 @@ old_mouseX = 320
 side_change = 1
 
 def fish_movement():
-    global player_fish_x, player_fish_y, player_fish_length, player_fish_width, old_mouseX, side_change
+    global player_fish_x, player_fish_y, player_fish_length, player_fish_width
+    global old_mouseX, side_change
     fill(0)
-    ellipse(player_fish_x, player_fish_y, player_fish_length, player_fish_width)
+    ellipse(player_fish_x, player_fish_y,
+            player_fish_length, player_fish_width)
     player_fish_x = mouseX
     player_fish_y = mouseY
-    if old_mouseX > mouseX: #move right
-        triangle(player_fish_x + player_fish_length/3, player_fish_y, player_fish_x + player_fish_length/2 + player_fish_length/4, player_fish_y - player_fish_width/3, player_fish_x + player_fish_length/2 + player_fish_length/4, player_fish_y + player_fish_width/3)
+    if old_mouseX > mouseX:  # move right
+        triangle(player_fish_x + player_fish_length/3, player_fish_y,
+                 player_fish_x + player_fish_length/2 + player_fish_length/4,
+                 player_fish_y - player_fish_width/3,
+                 player_fish_x + player_fish_length/2 + player_fish_length/4,
+                 player_fish_y + player_fish_width/3)
         side_change = 0
-    elif old_mouseX < mouseX: #move left
-        triangle(player_fish_x - player_fish_length/3, player_fish_y, player_fish_x - player_fish_length/2 - player_fish_length/4, player_fish_y + player_fish_width/3, player_fish_x - player_fish_length/2 - player_fish_length/4, player_fish_y - player_fish_width/3)
+    elif old_mouseX < mouseX:  # move left
+        triangle(player_fish_x - player_fish_length/3, player_fish_y,
+                 player_fish_x - player_fish_length/2 - player_fish_length/4,
+                 player_fish_y + player_fish_width/3,
+                 player_fish_x - player_fish_length/2 - player_fish_length/4,
+                 player_fish_y - player_fish_width/3)
         side_change = 1
     if side_change == 1:
-        triangle(player_fish_x - player_fish_length/3, player_fish_y, player_fish_x - player_fish_length/2 - player_fish_length/4, player_fish_y + player_fish_width/3, player_fish_x - player_fish_length/2 - player_fish_length/4, player_fish_y - player_fish_width/3)
+        triangle(player_fish_x - player_fish_length/3, player_fish_y,
+                 player_fish_x - player_fish_length/2 - player_fish_length/4,
+                 player_fish_y + player_fish_width/3,
+                 player_fish_x - player_fish_length/2 - player_fish_length/4,
+                 player_fish_y - player_fish_width/3)
     else:
-        triangle(player_fish_x + player_fish_length/3, player_fish_y, player_fish_x + player_fish_length/2 + player_fish_length/4, player_fish_y - player_fish_width/3, player_fish_x + player_fish_length/2 + player_fish_length/4, player_fish_y + player_fish_width/3)
+        triangle(player_fish_x + player_fish_length/3, player_fish_y,
+                 player_fish_x + player_fish_length/2 + player_fish_length/4,
+                 player_fish_y - player_fish_width/3,
+                 player_fish_x + player_fish_length/2 + player_fish_length/4,
+                 player_fish_y + player_fish_width/3)
     old_mouseX = player_fish_x
     
 def keyPressed():
@@ -207,10 +229,13 @@ def generation():
         o_fish_length.append(o_fish_width[fish_num] + o_fish_width[fish_num]/2)
         o_fish_colour.append(color(random(255), random(255), random(255)))
     
-        if o_fish_xco[fish_num] == 0: #fish starts on the left and travels right
+        # fish starts on the left and travels right
+        if o_fish_xco[fish_num] == 0:
             o_fish_xco[fish_num] = int(random(-400, -40))
             speed.append(random(1, 2))
-        else: #fish starts on the right and travels left
+            
+        # fish starts on the right and travels left
+        else:
             o_fish_xco[fish_num] = int(random(940, 680))
             speed.append(-(random(1, 2)))
         
@@ -219,16 +244,18 @@ update_points = 0
 score = 0
 
 def other_fish():
-    global speed, o_fish_length, o_fish_width, player_fish_width, player_fish_length, death
-    global points, update_points, score
+    global o_fish_length, o_fish_width, player_fish_width, player_fish_length
+    global points, update_points, score, speed, death
     noStroke()
     for fish_num in range(10):
         noStroke()
         fill(o_fish_colour[fish_num])
-        if (speed[fish_num] < 0 and o_fish_xco[fish_num] < -100) or (speed[fish_num] > 0 and o_fish_xco[fish_num] > 740):
+        if (speed[fish_num] < 0 and o_fish_xco[fish_num] < -100) or \
+           (speed[fish_num] > 0 and o_fish_xco[fish_num] > 740):
             o_fish_yco[fish_num] = (int(random(50, 430)))
             o_fish_xco[fish_num] = (int(random(2)))
-            o_fish_colour[fish_num] = (color(random(255), random(255), random(255)))
+            o_fish_colour[fish_num] = \
+                (color(random(255), random(255), random(255)))
             if o_fish_xco[fish_num] == 0:
                 o_fish_xco[fish_num] = int(random(-400, -40))
                 speed[fish_num] = (random(1, 2))
@@ -236,55 +263,145 @@ def other_fish():
                 o_fish_xco[fish_num] = int(random(940, 680))
                 speed[fish_num] = (-(random(1, 2)))
         
-        if speed[fish_num] < 0: #fish travels right
-            ellipse(o_fish_xco[fish_num], o_fish_yco[fish_num], o_fish_length[fish_num], o_fish_width[fish_num])
-            triangle(o_fish_xco[fish_num] + o_fish_length[fish_num]/3, o_fish_yco[fish_num], o_fish_xco[fish_num] + o_fish_length[fish_num]/2 + o_fish_length[fish_num]/4, o_fish_yco[fish_num] - o_fish_width[fish_num]/3, o_fish_xco[fish_num] + o_fish_length[fish_num]/2 + o_fish_length[fish_num]/4, o_fish_yco[fish_num] + o_fish_width[fish_num]/3)
-            quad(o_fish_xco[fish_num], o_fish_yco[fish_num] - o_fish_width[fish_num]/5,  o_fish_xco[fish_num] + o_fish_length[fish_num]/4.5, o_fish_yco[fish_num] - o_fish_width[fish_num]/2 - o_fish_width[fish_num]/4.5, o_fish_xco[fish_num] + o_fish_length[fish_num]/2, o_fish_yco[fish_num] - o_fish_width[fish_num]/2 - o_fish_width[fish_num]/5.5, o_fish_xco[fish_num] + o_fish_length[fish_num]/6, o_fish_yco[fish_num] - o_fish_width[fish_num]/4 )
-            quad(o_fish_xco[fish_num], o_fish_yco[fish_num] + o_fish_width[fish_num]/5,  o_fish_xco[fish_num] + o_fish_length[fish_num]/4.5, o_fish_yco[fish_num] + o_fish_width[fish_num]/2 + o_fish_width[fish_num]/4.5, o_fish_xco[fish_num] + o_fish_length[fish_num]/2, o_fish_yco[fish_num] + o_fish_width[fish_num]/2 + o_fish_width[fish_num]/5.5, o_fish_xco[fish_num] + o_fish_length[fish_num]/6, o_fish_yco[fish_num] + o_fish_width[fish_num]/4 )
+        if speed[fish_num] < 0:  # fish travels right
+            ellipse(o_fish_xco[fish_num], o_fish_yco[fish_num],
+                    o_fish_length[fish_num], o_fish_width[fish_num])
+            triangle(o_fish_xco[fish_num] + o_fish_length[fish_num]/3,
+                     o_fish_yco[fish_num],
+                     o_fish_xco[fish_num] + o_fish_length[fish_num]/2
+                     + o_fish_length[fish_num]/4,
+                     o_fish_yco[fish_num] - o_fish_width[fish_num]/3,
+                     o_fish_xco[fish_num] + o_fish_length[fish_num]/2
+                     + o_fish_length[fish_num]/4,
+                     o_fish_yco[fish_num] + o_fish_width[fish_num]/3)
+            quad(o_fish_xco[fish_num],
+                 o_fish_yco[fish_num] - o_fish_width[fish_num]/5,
+                 o_fish_xco[fish_num] + o_fish_length[fish_num]/4.5,
+                 o_fish_yco[fish_num] - o_fish_width[fish_num]/2
+                 - o_fish_width[fish_num]/4.5,
+                 o_fish_xco[fish_num] + o_fish_length[fish_num]/2,
+                 o_fish_yco[fish_num] - o_fish_width[fish_num]/2
+                 - o_fish_width[fish_num]/5.5,
+                 o_fish_xco[fish_num] + o_fish_length[fish_num]/6,
+                 o_fish_yco[fish_num] - o_fish_width[fish_num]/4)
+            quad(o_fish_xco[fish_num],
+                 o_fish_yco[fish_num] + o_fish_width[fish_num]/5,
+                 o_fish_xco[fish_num] + o_fish_length[fish_num]/4.5,
+                 o_fish_yco[fish_num] + o_fish_width[fish_num]/2
+                 + o_fish_width[fish_num]/4.5,
+                 o_fish_xco[fish_num] + o_fish_length[fish_num]/2,
+                 o_fish_yco[fish_num] + o_fish_width[fish_num]/2
+                 + o_fish_width[fish_num]/5.5,
+                 o_fish_xco[fish_num] + o_fish_length[fish_num]/6,
+                 o_fish_yco[fish_num] + o_fish_width[fish_num]/4)
             stroke(0)
-            ellipse(o_fish_xco[fish_num] - o_fish_length[fish_num]/4, o_fish_yco[fish_num] - o_fish_width[fish_num]/8, o_fish_width[fish_num]/3.5, o_fish_width[fish_num]/3.5)
+            ellipse(o_fish_xco[fish_num] - o_fish_length[fish_num]/4,
+                    o_fish_yco[fish_num] - o_fish_width[fish_num]/8,
+                    o_fish_width[fish_num]/3.5, o_fish_width[fish_num]/3.5)
             fill(0)
-            ellipse(o_fish_xco[fish_num] - o_fish_length[fish_num]/4, o_fish_yco[fish_num] - o_fish_width[fish_num]/8, o_fish_width[fish_num]/7, o_fish_width[fish_num]/7)
-        else: #fish travels left
-            ellipse(o_fish_xco[fish_num], o_fish_yco[fish_num], o_fish_length[fish_num], o_fish_width[fish_num])
-            triangle(o_fish_xco[fish_num] - o_fish_length[fish_num]/3, o_fish_yco[fish_num], o_fish_xco[fish_num] - o_fish_length[fish_num]/2 - o_fish_length[fish_num]/4, o_fish_yco[fish_num] + o_fish_width[fish_num]/3, o_fish_xco[fish_num] - o_fish_length[fish_num]/2 - o_fish_length[fish_num]/4, o_fish_yco[fish_num] - o_fish_width[fish_num]/3)
-            quad(o_fish_xco[fish_num], o_fish_yco[fish_num] + o_fish_width[fish_num]/5,  o_fish_xco[fish_num] - o_fish_length[fish_num]/4.5, o_fish_yco[fish_num] + o_fish_width[fish_num]/2 + o_fish_width[fish_num]/4.5, o_fish_xco[fish_num] - o_fish_length[fish_num]/2, o_fish_yco[fish_num] + o_fish_width[fish_num]/2 + o_fish_width[fish_num]/5.5, o_fish_xco[fish_num] - o_fish_length[fish_num]/6, o_fish_yco[fish_num] + o_fish_width[fish_num]/4 )
-            quad(o_fish_xco[fish_num], o_fish_yco[fish_num] - o_fish_width[fish_num]/5,  o_fish_xco[fish_num] - o_fish_length[fish_num]/4.5, o_fish_yco[fish_num] - o_fish_width[fish_num]/2 - o_fish_width[fish_num]/4.5, o_fish_xco[fish_num] - o_fish_length[fish_num]/2, o_fish_yco[fish_num] - o_fish_width[fish_num]/2 - o_fish_width[fish_num]/5.5, o_fish_xco[fish_num] - o_fish_length[fish_num]/6, o_fish_yco[fish_num] - o_fish_width[fish_num]/4 )
+            ellipse(o_fish_xco[fish_num] - o_fish_length[fish_num]/4,
+                    o_fish_yco[fish_num] - o_fish_width[fish_num]/8,
+                    o_fish_width[fish_num]/7, o_fish_width[fish_num]/7)
+        else:  # fish travels left
+            ellipse(o_fish_xco[fish_num], o_fish_yco[fish_num],
+                    o_fish_length[fish_num], o_fish_width[fish_num])
+            triangle(o_fish_xco[fish_num] - o_fish_length[fish_num]/3,
+                     o_fish_yco[fish_num],
+                     o_fish_xco[fish_num] - o_fish_length[fish_num]/2
+                     - o_fish_length[fish_num]/4,
+                     o_fish_yco[fish_num] + o_fish_width[fish_num]/3,
+                     o_fish_xco[fish_num] - o_fish_length[fish_num]/2
+                     - o_fish_length[fish_num]/4,
+                     o_fish_yco[fish_num] - o_fish_width[fish_num]/3)
+            quad(o_fish_xco[fish_num],
+                 o_fish_yco[fish_num] + o_fish_width[fish_num]/5,
+                 o_fish_xco[fish_num] - o_fish_length[fish_num]/4.5,
+                 o_fish_yco[fish_num] + o_fish_width[fish_num]/2
+                 + o_fish_width[fish_num]/4.5,
+                 o_fish_xco[fish_num] - o_fish_length[fish_num]/2,
+                 o_fish_yco[fish_num] + o_fish_width[fish_num]/2
+                 + o_fish_width[fish_num]/5.5,
+                 o_fish_xco[fish_num] - o_fish_length[fish_num]/6,
+                 o_fish_yco[fish_num] + o_fish_width[fish_num]/4)
+            quad(o_fish_xco[fish_num],
+                 o_fish_yco[fish_num] - o_fish_width[fish_num]/5,
+                 o_fish_xco[fish_num] - o_fish_length[fish_num]/4.5,
+                 o_fish_yco[fish_num] - o_fish_width[fish_num]/2
+                 - o_fish_width[fish_num]/4.5,
+                 o_fish_xco[fish_num] - o_fish_length[fish_num]/2,
+                 o_fish_yco[fish_num] - o_fish_width[fish_num]/2
+                 - o_fish_width[fish_num]/5.5,
+                 o_fish_xco[fish_num] - o_fish_length[fish_num]/6,
+                 o_fish_yco[fish_num] - o_fish_width[fish_num]/4)
             stroke(0)
-            ellipse(o_fish_xco[fish_num] + o_fish_length[fish_num]/4, o_fish_yco[fish_num] - o_fish_width[fish_num]/8, o_fish_width[fish_num]/3.5, o_fish_width[fish_num]/3.5)
+            ellipse(o_fish_xco[fish_num] + o_fish_length[fish_num]/4,
+                    o_fish_yco[fish_num] - o_fish_width[fish_num]/8,
+                    o_fish_width[fish_num]/3.5, o_fish_width[fish_num]/3.5)
             fill(0)
-            ellipse(o_fish_xco[fish_num] + o_fish_length[fish_num]/4, o_fish_yco[fish_num] - o_fish_width[fish_num]/8, o_fish_width[fish_num]/7, o_fish_width[fish_num]/7)
+            ellipse(o_fish_xco[fish_num] + o_fish_length[fish_num]/4,
+                    o_fish_yco[fish_num] - o_fish_width[fish_num]/8,
+                    o_fish_width[fish_num]/7, o_fish_width[fish_num]/7)
         
         o_fish_xco[fish_num] += speed[fish_num]
 
         # Increase score
-        if player_fish_width > o_fish_width[fish_num] + 5 and speed[fish_num] > 0:
-                if player_fish_x - player_fish_length/2 in range(int(o_fish_xco[fish_num] - o_fish_length[fish_num]/3), int(o_fish_xco[fish_num] + o_fish_length[fish_num]/3)):
-                    if o_fish_yco[fish_num] in range(int(player_fish_y - player_fish_width/2), int(player_fish_y + player_fish_width/2 )):
+        if player_fish_width > o_fish_width[fish_num] + 5 and \
+           speed[fish_num] > 0:
+                if player_fish_x - player_fish_length/2 in range \
+                   (int(o_fish_xco[fish_num] - o_fish_length[fish_num]/3),
+                    int(o_fish_xco[fish_num] + o_fish_length[fish_num]/3)):
+                    if o_fish_yco[fish_num] in range \
+                       (int(player_fish_y - player_fish_width/2),
+                        int(player_fish_y + player_fish_width/2)):
                         points += 1
                         o_fish_xco[fish_num] = 800
-                elif player_fish_x + player_fish_length/2 in range(int(o_fish_xco[fish_num] - o_fish_length[fish_num]/2 - o_fish_length[fish_num]/4), int(o_fish_xco[fish_num] + o_fish_length[fish_num]/3)):
-                    if o_fish_yco[fish_num] in range(int(player_fish_y - player_fish_width/2), int(player_fish_y + player_fish_width/2 )):
+                elif player_fish_x + player_fish_length/2 in range \
+                     (int(o_fish_xco[fish_num] - o_fish_length[fish_num]/2
+                      - o_fish_length[fish_num]/4),
+                      int(o_fish_xco[fish_num] + o_fish_length[fish_num]/3)):
+                    if o_fish_yco[fish_num] in range \
+                       (int(player_fish_y - player_fish_width/2),
+                        int(player_fish_y + player_fish_width/2)):
                         points += 1
                         o_fish_xco[fish_num] = 800
-        elif player_fish_width > o_fish_width[fish_num] + 5 and speed[fish_num] < 0:
-                if player_fish_x + player_fish_length/2 in range(int(o_fish_xco[fish_num] - o_fish_length[fish_num]/3), int(o_fish_xco[fish_num] + o_fish_length[fish_num]/2)):
-                    if o_fish_yco[fish_num] in range(int(player_fish_y - player_fish_width/2), int(player_fish_y + player_fish_width/2 )):
+        elif player_fish_width > o_fish_width[fish_num] + 5 and \
+             speed[fish_num] < 0:
+                if player_fish_x + player_fish_length/2 in range \
+                   (int(o_fish_xco[fish_num] - o_fish_length[fish_num]/3),
+                    int(o_fish_xco[fish_num] + o_fish_length[fish_num]/2)):
+                    if o_fish_yco[fish_num] in range \
+                       (int(player_fish_y - player_fish_width/2),
+                        int(player_fish_y + player_fish_width/2)):
                         points += 1
                         o_fish_xco[fish_num] = -200
-                elif player_fish_x - player_fish_length/2 in range(int(o_fish_xco[fish_num] - o_fish_length[fish_num]/3),int(o_fish_xco[fish_num] + o_fish_length[fish_num]/2 + o_fish_length[fish_num]/4)):
-                    if o_fish_yco[fish_num] in range(int(player_fish_y - player_fish_width/2), int(player_fish_y + player_fish_width/2 )):
+                elif player_fish_x - player_fish_length/2 in range \
+                     (int(o_fish_xco[fish_num] - o_fish_length[fish_num]/3),
+                      int(o_fish_xco[fish_num] + o_fish_length[fish_num]/2
+                      + o_fish_length[fish_num]/4)):
+                    if o_fish_yco[fish_num] in range \
+                       (int(player_fish_y - player_fish_width/2),
+                        int(player_fish_y + player_fish_width/2)):
                         points += 1
                         o_fish_xco[fish_num] = -200
     
-        #death
+        # death
         if player_fish_width < o_fish_width[fish_num] and speed[fish_num] > 0:
-                if player_fish_x - player_fish_length/2 in range(int(o_fish_xco[fish_num]), int(o_fish_xco[fish_num] + o_fish_length[fish_num]/3)):
-                    if player_fish_y in range(int(o_fish_yco[fish_num] - o_fish_width[fish_num]/2), int(o_fish_yco[fish_num] + o_fish_width[fish_num]/2)):
+                if player_fish_x - player_fish_length/2 in range \
+                   (int(o_fish_xco[fish_num]),
+                    int(o_fish_xco[fish_num] + o_fish_length[fish_num]/3)):
+                    if player_fish_y in range \
+                       (int(o_fish_yco[fish_num] - o_fish_width[fish_num]/2),
+                        int(o_fish_yco[fish_num]
+                        + o_fish_width[fish_num]/2)):
                         death = True
         elif player_fish_width < o_fish_width and speed[fish_num] < 0:
-                if player_fish_x + player_fish_length/2 in range(int(o_fish_xco[fish_num] - o_fish_length[fish_num]/3), int(o_fish_xco[fish_num])):
-                    if player_fish_y in range(int(o_fish_yco[fish_num] - o_fish_width[fish_num]/2), int(o_fish_yco[fish_num] + o_fish_width[fish_num]/2)):
+                if player_fish_x + player_fish_length/2 in range \
+                   (int(o_fish_xco[fish_num] - o_fish_length[fish_num]/3),
+                    int(o_fish_xco[fish_num])):
+                    if player_fish_y in range \
+                       (int(o_fish_yco[fish_num] - o_fish_width[fish_num]/2),
+                        int(o_fish_yco[fish_num]
+                        + o_fish_width[fish_num]/2)):
                         death = True
         
         if points != update_points:
